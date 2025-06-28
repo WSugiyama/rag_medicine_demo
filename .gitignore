@@ -1,0 +1,10 @@
+cat <<EOF > .gitignore
+.env
+*.json
+__pycache__/
+*.pyc
+.DS_Store
+data/*
+!data/README.md
+EOF
+
