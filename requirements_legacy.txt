@@ -1,0 +1,7 @@
+openai>=1.0.0
+pymilvus>=2.3.0
+python-dotenv>=1.0.0
+biopython>=1.80
+langdetect>=1.0.9
+spacy>=3.7.0
+

@@ -12,7 +12,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 # Connect to Milvus
 connections.connect(alias="default", host="localhost", port="19530")
 
-COLLECTION_NAME = "PubMed_Integrative"
+COLLECTION_NAME = "PubMed_Integrative_v2"
 EMBEDDING_MODEL = os.getenv("OPENAI_ENGINE", "text-embedding-3-small")
 
 # Drop collection if it exists
@@ -25,9 +25,11 @@ fields = [
     FieldSchema(name="title", dtype=DataType.VARCHAR, max_length=512),
     FieldSchema(name="abstract", dtype=DataType.VARCHAR, max_length=2048),
     FieldSchema(name="lang", dtype=DataType.VARCHAR, max_length=10),
+    FieldSchema(name="pmid", dtype=DataType.VARCHAR, max_length=32),
+    FieldSchema(name="doi", dtype=DataType.VARCHAR, max_length=256),
     FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim=1536)
 ]
-schema = CollectionSchema(fields, description="PubMed Integrative Medicine Collection")
+schema = CollectionSchema(fields, description="PubMed Integrative Medicine Collection v2")
 collection = Collection(name=COLLECTION_NAME, schema=schema)
 
 BATCH_SIZE = 32
@@ -46,6 +48,8 @@ texts = [doc["abstract"] for doc in docs]
 
 titles = [doc["title"] for doc in docs]
 langs = [doc["lang"] for doc in docs]
+pmids = [doc["pmid"] for doc in docs]
+dois = [doc.get("doi", "") for doc in docs]  # Handle cases where DOI might be None
 
 # Insert
 # collection.insert([titles, texts, langs, embeddings])
@@ -65,7 +69,9 @@ for i in range(0, len(texts), BATCH_SIZE):
 
     try:
         batch_embeddings = embed_texts(batch_texts)
-        entities = [batch_titles, batch_texts, batch_langs, batch_embeddings]
+        batch_pmids = pmids[i:i + BATCH_SIZE]
+        batch_dois = dois[i:i + BATCH_SIZE]
+        entities = [batch_titles, batch_texts, batch_langs, batch_pmids, batch_dois, batch_embeddings]
 
         collection.insert(entities)
         collection.flush()

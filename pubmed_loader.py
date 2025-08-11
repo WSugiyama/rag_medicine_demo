@@ -20,11 +20,21 @@ def fetch_pubmed(query, max_results=1024):
             abstract = article["MedlineCitation"]["Article"]["Abstract"]["AbstractText"][0]
             lang = article["MedlineCitation"]["Article"]["Language"][0]
             pmid = article["MedlineCitation"]["PMID"]
+            
+            # Extract DOI if available
+            doi = None
+            if "PubmedData" in article and "ArticleIdList" in article["PubmedData"]:
+                for article_id in article["PubmedData"]["ArticleIdList"]:
+                    if article_id.attributes["IdType"] == "doi":
+                        doi = str(article_id)
+                        break
+            
             results.append({
                 "pmid": str(pmid),
                 "title": title,
                 "abstract": abstract,
-                "lang": lang
+                "lang": lang,
+                "doi": doi
             })
         except Exception:
             continue  # Some articles might not have abstracts
