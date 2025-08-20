@@ -107,3 +107,4 @@ try:
     print(f"🎉 Ready to use with citations! Run 'python3 rag_pubmed_assistant.py' to test.")
 except Exception as e:
     print(f"❌ Failed to load collection: {e}")
+

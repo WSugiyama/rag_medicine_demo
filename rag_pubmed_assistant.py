@@ -29,6 +29,10 @@ COLLECTION_NAME = "PubMed_Integrative_v2"
 EMBEDDING_MODEL = os.getenv("OPENAI_ENGINE", "text-embedding-3-small")
 GPT_MODEL = os.getenv("GPT_MODEL", "gpt-4o")  # Default to gpt-4o
 
+# Standardized messages for no-result scenarios
+NO_RESULTS_MESSAGE = "No results found for your query."
+NO_RELEVANT_MESSAGE = "No relevant results found after filtering."
+
 # Connect to Milvus
 connections.connect(alias="default", host="localhost", port="19530")
 collection = Collection(name=COLLECTION_NAME)
@@ -46,20 +50,26 @@ def add_citations_to_answer(answer, sources):
     """Add citations to key statements in the answer if none are present"""
     if not sources:
         return answer
+    # Do not add citations to standardized no-result messages
+    if answer.strip() in {NO_RESULTS_MESSAGE, NO_RELEVANT_MESSAGE}:
+        return answer
     
     # Split answer into sentences
     sentences = answer.split('. ')
     cited_answer = []
-    
-    for i, sentence in enumerate(sentences):
-        if sentence.strip():
-            # Add citation to every other sentence to ensure coverage
-            if i % 2 == 0 and i < len(sources):
-                citation_num = min(i + 1, len(sources))
-                cited_answer.append(f"{sentence} [{citation_num}]")
-            else:
-                cited_answer.append(sentence)
-    
+    next_citation = 1
+    total_citations = len(sources)
+
+    for sentence in sentences:
+        cleaned = sentence.strip()
+        if not cleaned:
+            continue
+        if next_citation <= total_citations:
+            cited_answer.append(f"{cleaned} [{next_citation}]")
+            next_citation += 1
+        else:
+            cited_answer.append(cleaned)
+
     return '. '.join(cited_answer)
 
 # Helper: Extract key medical terms from query using NER
@@ -78,11 +88,13 @@ def extract_medical_terms(query):
     
     # Also extract common medical prefixes/suffixes that might not be caught by NER
     medical_patterns = [
-        r'\b(probiotic|antibiotic|anti-inflammatory|anti-viral)\b',
+        r'\b(probiotic|probiotics|antibiotic|antibiotics|anti-inflammatory|anti-viral)\b',
         r'\b(covid|coronavirus|sars-cov)\b',
         r'\b(herbal|natural|traditional|alternative)\b',
-        r'\b(inflammation|immune|immunity)\b',
-        r'\b(treatment|therapy|intervention|study)\b'
+        r'\b(inflammation|inflammatory|immune|immunity|cardiovascular|digestive)\b',
+        r'\b(treatment|therapy|intervention|study|supplement|supplements)\b',
+        r'\b(turmeric|acupuncture|meditation|yoga|arthritis|anxiety|depression)\b',
+        r'\b(omega[-\s]?3|omega3|fatty acids)\b',
     ]
     
     pattern_terms = []
@@ -163,19 +175,21 @@ def reorder_sources_by_usage(answer, sources, final_results, source_metadata):
 
 # Helper: Safely remap citations in answer text using regex
 def remap_citations_in_answer(answer, citation_mapping):
-    """Safely remaps citation numbers in answer text using regex with word boundaries."""
-    updated_answer = answer
-    
-    # Sort by old_num in descending order to avoid conflicts
-    # (e.g., replace [15] before [5] to prevent [15] -> [11])
-    sorted_mapping = sorted(citation_mapping.items(), key=lambda x: x[0], reverse=True)
-    
-    for old_num, new_num in sorted_mapping:
-        # Use regex with word boundaries to ensure exact matches
-        pattern = r'\b' + re.escape(f"[{old_num}]") + r'\b'
-        replacement = f"[{new_num}]"
-        updated_answer = re.sub(pattern, replacement, updated_answer)
-    
+    """Safely remap citation numbers using a two-phase placeholder strategy to avoid collisions."""
+    # Phase 1: convert all citations to collision-free placeholders using original numbers
+    def to_placeholder(match: re.Match) -> str:
+        original_num = match.group(1)
+        return f"[__{original_num}__]"
+
+    phase_one = re.sub(r"(?<!\d)\[(\d+)\](?!\d)", to_placeholder, answer)
+
+    # Phase 2: replace placeholders with their mapped numbers (or original if unmapped)
+    def from_placeholder(match: re.Match) -> str:
+        original_num = int(match.group(1))
+        new_num = citation_mapping.get(original_num, original_num)
+        return f"[{new_num}]"
+
+    updated_answer = re.sub(r"\[__(\d+)__\]", from_placeholder, phase_one)
     return updated_answer
 
 # Helper: Format a source line from metadata
@@ -215,8 +229,8 @@ def generate_answer_with_rag(query, top_k=5, lang_filter=None):
     )
 
     if not results or not results[0]:
-        print("⚠️ No results found for your query.")
-        return
+        print(f"⚠️ {NO_RESULTS_MESSAGE}")
+        return {"status": "no_results", "answer": NO_RESULTS_MESSAGE, "sources": []}
 
     # Filter results by relevance
     relevant_results = filter_results_by_relevance(results[0], query, medical_terms)
@@ -225,8 +239,8 @@ def generate_answer_with_rag(query, top_k=5, lang_filter=None):
     final_results = relevant_results[:top_k]
     
     if not final_results:
-        print("⚠️ No relevant results found after filtering.")
-        return
+        print(f"⚠️ {NO_RELEVANT_MESSAGE}")
+        return {"status": "no_results", "answer": NO_RELEVANT_MESSAGE, "sources": []}
 
     print(f"✅ Found {len(final_results)} relevant sources")
     
@@ -285,11 +299,13 @@ def generate_answer_with_rag(query, top_k=5, lang_filter=None):
 
     print("\n💬 RAG Answer:\n")
     print(answer)
-    
+
     # Print Sources section with clickable links (same order as passages/context)
     print("\n📚 Sources:\n")
     for line in sources:
         print(line)
+
+    return {"status": "ok", "answer": answer, "sources": sources}
 
 # CLI Entry Point
 if __name__ == "__main__":
