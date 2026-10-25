@@ -5,12 +5,18 @@ import re
 from dotenv import load_dotenv
 from pymilvus import connections, Collection
 import openai
+from openai import OpenAI
 import langdetect
 import spacy
 
 # Load environment variables
 load_dotenv()
-openai.api_key = os.getenv("OPENAI_API_KEY")
+
+# Ollama local configuration support
+if os.getenv("USE_LOCAL_LLM", "false").lower() == "true":
+    openai.base_url = "http://localhost:11434/v1"
+    openai.api_key = "ollama"
+
 
 # Load spaCy model for NER (fallback to English if specific model not available)
 try:
@@ -24,10 +30,25 @@ except OSError:
         subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"])
         nlp = spacy.load("en_core_web_sm")
 
+# Initialize the OpenAI client for local Ollama use
+client = OpenAI(
+    base_url="http://localhost:11434/v1",
+    api_key="ollama"  # Ollama doesn't require a real key
+)
+
 # Configuration
 COLLECTION_NAME = "PubMed_Integrative_v2"
-EMBEDDING_MODEL = os.getenv("OPENAI_ENGINE", "text-embedding-3-small")
-GPT_MODEL = os.getenv("GPT_MODEL", "gpt-4o")  # Default to gpt-4o
+
+# Automatically switch embedding model based on local/cloud mode
+if os.getenv("USE_LOCAL_LLM", "false").lower() == "true":
+    EMBEDDING_MODEL = "nomic-embed-text"
+    GPT_MODEL = "gemma2"
+    openai.base_url = "http://localhost:11434/v1"
+    openai.api_key = "ollama"
+else:
+    EMBEDDING_MODEL = os.getenv("OPENAI_ENGINE", "text-embedding-3-small")
+    GPT_MODEL = os.getenv("GPT_MODEL", "gpt-4o")
+
 
 # Standardized messages for no-result scenarios
 NO_RESULTS_MESSAGE = "No results found for your query."
@@ -39,11 +60,12 @@ collection = Collection(name=COLLECTION_NAME)
 
 # Helper: Embed query
 def embed_query(query):
-    response = openai.embeddings.create(
+    response = client.embeddings.create(
         input=[query],
         model=EMBEDDING_MODEL
     )
     return response.data[0].embedding
+
 
 # Helper: Add citations to answer if missing
 def add_citations_to_answer(answer, sources):
@@ -106,8 +128,39 @@ def extract_medical_terms(query):
     all_terms = relevant_entities + pattern_terms
     return list(set(all_terms))
 
+def compute_dynamic_weights(query, medical_terms, initial_distances):
+    words = query.split()
+    word_count = len(words) if words else 1
+    
+    # 1. Entity Density
+    d_ner = len(medical_terms) / word_count
+    
+    # 2. Semantic Ambiguity via score variance (if results exist)
+    if initial_distances:
+        import numpy as np
+        score_variance = np.var(initial_distances)
+    else:
+        score_variance = 0.1
+        
+    # Heuristic adjustment rule
+    if d_ner > 0.3:
+        # Specific query -> boost keyword weight
+        semantic_weight = 0.5
+        keyword_weight = 0.5
+    elif score_variance < 0.01:
+        # Ambiguous/flat vector space -> lean heavily on dense semantic clustering
+        semantic_weight = 0.85
+        keyword_weight = 0.15
+    else:
+        # Default balanced fallback
+        semantic_weight = 0.7
+        keyword_weight = 0.3
+        
+    return semantic_weight, keyword_weight
+
+
 # Helper: Filter results by relevance
-def filter_results_by_relevance(results, query, medical_terms):
+def filter_results_by_relevance(results, query, medical_terms, semantic_weight, keyword_weight):
     """Filter results using hybrid approach: semantic similarity + keyword relevance"""
     if not medical_terms:
         return results  # Return all if no medical terms extracted
@@ -133,7 +186,7 @@ def filter_results_by_relevance(results, query, medical_terms):
         
         # Hybrid score: combine semantic and keyword relevance
         # Weight semantic similarity more heavily (70%) than keyword matching (30%)
-        hybrid_score = 0.7 * semantic_score + 0.3 * (keyword_score / len(medical_terms))
+        hybrid_score = semantic_weight * semantic_score + keyword_weight * (keyword_score / len(medical_terms))
         
         scored_results.append((r, hybrid_score))
     
@@ -232,8 +285,18 @@ def generate_answer_with_rag(query, top_k=5, lang_filter=None):
         print(f"⚠️ {NO_RESULTS_MESSAGE}")
         return {"status": "no_results", "answer": NO_RESULTS_MESSAGE, "sources": []}
 
+    if not results or not results[0]:
+        print(f"⚠️ {NO_RESULTS_MESSAGE}")
+        return {"status": "no_results", "answer": NO_RESULTS_MESSAGE, "sources": []}
+
+    # Extract distances for semantic ambiguity variance calculation
+    initial_distances = [hit.distance for hit in results[0]]
+
+    semantic_weight, keyword_weight = compute_dynamic_weights(query, medical_terms, initial_distances)
+    
     # Filter results by relevance
-    relevant_results = filter_results_by_relevance(results[0], query, medical_terms)
+    relevant_results = filter_results_by_relevance(results[0], query, medical_terms, semantic_weight, keyword_weight)
+
     
     # Take top_k most relevant results
     final_results = relevant_results[:top_k]
@@ -244,8 +307,16 @@ def generate_answer_with_rag(query, top_k=5, lang_filter=None):
 
     print(f"✅ Found {len(final_results)} relevant sources")
     
+
     # Build source metadata list and aligned passages before prompting
-    question_lang = langdetect.detect(query)
+    try:
+        question_lang = langdetect.detect(query)
+    except Exception:
+        question_lang = "en"
+        
+    # if langdetect misidentifies short English text as Spanish/other
+    if question_lang not in ["en", "id"] and all(ord(c) < 128 for c in query):
+        question_lang = "en"
 
     # Build source metadata list for citations (preserves final_results order)
     source_metadata = []
@@ -272,24 +343,36 @@ def generate_answer_with_rag(query, top_k=5, lang_filter=None):
     # Passages aligned to the same order as sources
     passages = [m["abstract"] for m in source_metadata]
 
-    # Build prompt
-    prompt = (
-        f"You are a multilingual, world-class integrative medicine research assistant.\n"
+
+    # Define system behavior and language rules clearly
+    system_prompt = (
+        f"You are a multilingual, world-class integrative medicine research assistant. "
+        f"You MUST respond in the exact same language as the user's question "
+        f"(Target language code: {question_lang}). Do not switch languages."
+    )
+
+    # User message contains the actual task, context, and data
+    user_content = (
         f"Question: {query}\n\n"
         f"Use the following context to answer:\n\n"
         + "\n\n".join(passages)
         + f"\n\nIMPORTANT: You MUST cite sources using [1], [2], [3], etc. throughout your answer. "
-        f"Every claim or fact you mention should be backed by a citation from the provided sources. "
-        f"Respond in the same language as the question (detected: {question_lang}).\n\n"
+        f"Every claim or fact you mention should be backed by a citation from the provided sources.\n\n"
         f"Available sources:\n" + "\n".join(sources)
     )
 
-    response = openai.chat.completions.create(
+    # Call local Ollama chat endpoint with proper role separation
+    response = client.chat.completions.create(
         model=GPT_MODEL,
-        messages=[{"role": "user", "content": prompt}]
+        messages=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_content}
+        ]
     )
 
     answer = response.choices[0].message.content.strip()
+
+
     
     # Post-process to ensure citations are present
     if not any(f"[{i+1}]" in answer for i in range(len(sources))):

@@ -1,9 +1,19 @@
 .env
+.env.*
+!.env.example
+*.local
+
 *.json
+pubmed_integrative.json
+*.db
+*.sqlite
+
 __pycache__/
 *.pyc
 .DS_Store
 data/*
 !data/README.md
+
+venv/
 .venv/
 

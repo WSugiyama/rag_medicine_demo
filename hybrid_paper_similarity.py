@@ -5,14 +5,24 @@ from typing import Dict, List, Optional, Tuple
 from dotenv import load_dotenv
 from pymilvus import connections, Collection
 import openai
-
+from openai import OpenAI
 
 # Environment setup
 load_dotenv()
-openai.api_key = os.getenv("OPENAI_API_KEY")
-EMBEDDING_MODEL = os.getenv("OPENAI_ENGINE", "text-embedding-3-small")
-GPT_MODEL = os.getenv("GPT_MODEL", "gpt-4o")
+
+# Configuration
 COLLECTION_NAME = "PubMed_Integrative_v2"
+
+# Automatically switch embedding model based on local/cloud mode
+if os.getenv("USE_LOCAL_LLM", "false").lower() == "true":
+    EMBEDDING_MODEL = "nomic-embed-text"
+    GPT_MODEL = "gemma2"
+    openai.base_url = "http://localhost:11434/v1"
+    openai.api_key = "ollama"
+else:
+    EMBEDDING_MODEL = os.getenv("OPENAI_ENGINE", "text-embedding-3-small")
+    GPT_MODEL = os.getenv("GPT_MODEL", "gpt-4o")
+
 
 # Lazy import of helpers to avoid heavy dependencies at import-time
 def _try_import_rag_helpers():
@@ -294,9 +304,16 @@ def generate_similarity_analysis(query: str, reference_paper: Dict[str, str], si
         + "\n\nIMPORTANT: You MUST cite sources as [1], [2], [3], etc. throughout your answer."
     )
 
-    response = openai.chat.completions.create(
-        model=GPT_MODEL,
-        messages=[{"role": "user", "content": prompt}],
+
+# Point to local Ollama instance instead of OpenAI cloud
+    client = OpenAI(
+        base_url="http://localhost:11434/v1",
+        api_key="ollama" # Ollama doesn't require a real key
+    )
+
+    response = client.chat.completions.create(
+        model="gemma2",
+        messages=[{"role": "user", "content": prompt}]
     )
 
     answer = response.choices[0].message.content.strip()
