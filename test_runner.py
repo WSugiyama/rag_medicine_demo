@@ -151,7 +151,7 @@ class RAGSystemTest(unittest.TestCase):
             self.fail(f"Performance benchmark test failed with error: {str(e)}")
     
     def test_medical_term_extraction_edge_cases(self):
-        """Test edge cases for medical term extraction"""
+        """Test edge cases and out-of-domain filtering for medical term extraction"""
         print("Running Edge Case Tests...")
         print("-" * 40)
         
@@ -160,22 +160,25 @@ class RAGSystemTest(unittest.TestCase):
             
             # Test empty query
             empty_terms = extract_medical_terms("")
-            self.assertIsInstance(empty_terms, list, "Empty query should return empty list")
+            self.assertEqual(empty_terms, [], "Empty query should return an empty list")
             
-            # Test query with no medical terms
-            non_medical_terms = extract_medical_terms("What is the weather like today?")
-            self.assertIsInstance(non_medical_terms, list, "Non-medical query should return list")
+            # Test query with no medical terms (English & Indonesian)
+            non_medical_en = extract_medical_terms("What is the weather like today?")
+            non_medical_id = extract_medical_terms("Bagaimana cara membuat kue bolu?")
             
-            # Test very long query
+            self.assertEqual(non_medical_en, [], "Non-medical English query should return an empty list")
+            self.assertEqual(non_medical_id, [], "Non-medical Indonesian query should return an empty list")
+            
+            # Test very long query containing medical terms
             long_query = "What are the effects of " + "very " * 100 + "long COVID-19 symptoms?"
             long_terms = extract_medical_terms(long_query)
-            self.assertIsInstance(long_terms, list, "Long query should return list")
             self.assertIn("covid", [term.lower() for term in long_terms], "Long query should extract COVID terms")
             
-            self.print_result("Edge Cases", "PASS", "All edge cases handled correctly")
+            self.print_result("Edge Cases", "PASS", "All edge cases and out-of-domain gates handled correctly")
             
         except Exception as e:
             self.fail(f"Edge case test failed with error: {str(e)}")
+
     
     def test_citation_patterns(self):
         """Test citation pattern validation"""
@@ -211,6 +214,27 @@ class RAGSystemTest(unittest.TestCase):
         except Exception as e:
             self.fail(f"Citation pattern test failed with error: {str(e)}")
 
+    def test_indonesian_term_extraction(self):
+        """Test multilingual (Indonesian) medical term extraction"""
+        print("Running Indonesian Query Tests...")
+        print("-" * 40)
+        
+        try:
+            from rag_pubmed_assistant import extract_medical_terms
+            
+            for i, query in enumerate(INDONESIAN_MEDICAL_QUERIES, 1):
+                terms = extract_medical_terms(query)
+                
+                # Basic assertions for Indonesian support
+                self.assertIsNotNone(terms, f"No terms extracted for query: {query}")
+                self.assertIsInstance(terms, list, "Extracted terms must be a list")
+                self.assertGreater(len(terms), 0, f"Failed to extract keywords for Indonesian query: {query}")
+                
+                self.print_result(f"Indonesian Test {i}", "PASS", f"Query: '{query}' -> Terms: {terms}")
+                
+        except Exception as e:
+            self.fail(f"Indonesian term extraction test failed with error: {str(e)}")
+
 
 def run_covid_tests():
     """Run COVID-specific query tests (legacy function)"""
@@ -235,7 +259,8 @@ def run_performance_benchmark():
 
 def main():
     parser = argparse.ArgumentParser(description="Run RAG system tests")
-    parser.add_argument("--suite", choices=["covid", "citations", "perf", "all"], default="all")
+    parser.add_argument("--suite", choices=["covid", "citations", "perf", "indonesian", "all"], default="all")
+
     parser.add_argument("--verbose", "-v", action="store_true", help="Verbose output")
     args = parser.parse_args()
     
@@ -248,6 +273,13 @@ def main():
         test_suite.addTest(RAGSystemTest("test_citation_handling"))
     if args.suite in ("perf", "all"):
         test_suite.addTest(RAGSystemTest("test_performance_benchmarks"))
+
+    if args.suite in ("indonesian", "all"):
+        test_suite.addTest(RAGSystemTest("test_indonesian_term_extraction"))
+    if args.suite == "all":
+        test_suite.addTest(RAGSystemTest("test_medical_term_extraction_edge_cases"))
+        test_suite.addTest(RAGSystemTest("test_citation_patterns"))
+
     
     # Add edge case tests for comprehensive coverage
     if args.suite == "all":

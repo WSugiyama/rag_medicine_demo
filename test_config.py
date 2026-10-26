@@ -29,6 +29,13 @@ GENERAL_MEDICAL_QUERIES = [
     "Can yoga help with depression symptoms?"
 ]
 
+INDONESIAN_MEDICAL_QUERIES = [
+    "Apa saja gejala utama dari infeksi COVID-19?",
+    "Bagaimana efektivitas vaksin terhadap varian baru?",
+    "Apakah probiotik dapat membantu pemulihan pasien?",
+    "Apa saja faktor risiko untuk penyakit kardiovaskular?"
+]
+
 MULTILINGUAL_QUERIES = [
     ("¿Cuáles son los efectos del COVID-19 en el sistema inmune?", "es"),
     ("Comment les probiotiques affectent-ils la santé digestive?", "fr"),

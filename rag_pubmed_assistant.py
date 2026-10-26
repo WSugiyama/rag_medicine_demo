@@ -96,20 +96,21 @@ def add_citations_to_answer(answer, sources):
 
 # Helper: Extract key medical terms from query using NER
 def extract_medical_terms(query):
-    """Extract key medical terms using Named Entity Recognition for better scalability"""
+    """Extract key medical terms using NER and bilingual patterns. 
+    Returns an empty list if no medical terms are found (domain gatekeeper)."""
     doc = nlp(query.lower())
     
-    # Extract entities that are relevant for medical search
+    # 1. Extract standard NER entities
     relevant_entities = []
-    
     for ent in doc.ents:
         if ent.label_ in ["DISEASE", "CONDITION", "CHEMICAL", "TREATMENT", "PROCEDURE"]:
             relevant_entities.append(ent.text.lower())
-        elif ent.label_ == "ORG" and any(org_term in ent.text.lower() for org_term in ["hospital", "clinic", "medical", "health"]):
+        elif ent.label_ == "ORG" and any(term in ent.text.lower() for term in ["hospital", "clinic", "medical", "health"]):
             relevant_entities.append(ent.text.lower())
     
-    # Also extract common medical prefixes/suffixes that might not be caught by NER
+    # 2. Bilingual medical patterns (English + Indonesian)
     medical_patterns = [
+        # English patterns
         r'\b(probiotic|probiotics|antibiotic|antibiotics|anti-inflammatory|anti-viral)\b',
         r'\b(covid|coronavirus|sars-cov)\b',
         r'\b(herbal|natural|traditional|alternative)\b',
@@ -117,6 +118,9 @@ def extract_medical_terms(query):
         r'\b(treatment|therapy|intervention|study|supplement|supplements)\b',
         r'\b(turmeric|acupuncture|meditation|yoga|arthritis|anxiety|depression)\b',
         r'\b(omega[-\s]?3|omega3|fatty acids)\b',
+        # Indonesian patterns
+        r'\b(vaksin|vaccine|varian|variant|gejala|symptom|pengobatan|terapi)\b',
+        r'\b(kardiovaskular|imun|antibodi|probiotik|suplemen|herbal)\b'
     ]
     
     pattern_terms = []
@@ -124,9 +128,9 @@ def extract_medical_terms(query):
         matches = re.findall(pattern, query.lower())
         pattern_terms.extend(matches)
     
-    # Combine NER entities with pattern matches, removing duplicates
-    all_terms = relevant_entities + pattern_terms
-    return list(set(all_terms))
+    # Combine and de-duplicate (No risky fallback to general non-medical words)
+    return list(set(relevant_entities + pattern_terms))
+
 
 def compute_dynamic_weights(query, medical_terms, initial_distances):
     words = query.split()
