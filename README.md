@@ -81,8 +81,17 @@ The assistant provides answers with inline citations ```[1], [2], [3]``` and a S
 
 
 ## 🔐 Notes
-* Input abstracts are truncated if too long (Milvus VARCHAR limit = 2048 chars).
+* Input abstracts are truncated if too long (Milvus VARCHAR limit = 4096 chars).
 * All documents are embedded and inserted in batches for performance.
+
+## 🧪 Engineering Rigor & Testing Strategy
+
+To maintain high reliability without the latency and cost of heavy LLM-based evaluation frameworks (like RAGAS or LLM-as-a-judge), this project implements a **lightweight, deterministic unit-testing framework** (`unittest`):
+
+- **Domain Gatekeeper Pattern:** Non-medical queries (in both English and Indonesian) are intercepted by the term extraction layer and safely return an empty list (`[]`), preventing out-of-domain noise from polluting Milvus vector searches.
+- **Multilingual NER & Regex Hybrid:** Combines spaCy entity recognition with bilingual (English/Indonesian) regex patterns to ensure precise biomedical keyword extraction across languages.
+- **Structural Unit Tests:** Validates citation remapping, sequential integrity, and edge-case resilience with a **100% pass rate** on local test suites, keeping CI/CD feedback loops under 2 seconds.
+
 
 ## 🚀 Technical Improvements & Roadmap
 

@@ -270,7 +270,35 @@ def generate_answer_with_rag(query, top_k=5, lang_filter=None):
     
     # Extract medical terms for relevance filtering
     medical_terms = extract_medical_terms(query)
-    print(f"🔍 Searching for: {', '.join(medical_terms) if medical_terms else 'general medical research'}")
+    
+    # 🛑 DOMAIN GATEKEEPER: Refuse non-medical/out-of-domain queries
+    if not medical_terms:
+        print(f"🛑 Out-of-domain query detected: '{query}'. Refusing request.")
+        
+        # Determine language for a localized refusal message if needed, or default cleanly
+        try:
+            q_lang = langdetect.detect(query)
+        except Exception:
+            q_lang = "en"
+            
+        if q_lang == "id":
+            refusal_msg = (
+                "Mohon maaf, saya hanya dapat menjawab pertanyaan terkait riset medis dan biomedis PubMed "
+                "(seperti penyakit, pengobatan, gejala, atau studi klinis). Saya tidak dapat membantu pertanyaan umum."
+            )
+        else:
+            refusal_msg = (
+                "I'm sorry, but I can only answer biomedical and medical research questions "
+                "related to PubMed abstracts (e.g., diseases, treatments, symptoms, or clinical studies). "
+                "I cannot assist with general knowledge or non-medical queries."
+            )
+            
+        print(f"\n💬 RAG Answer:\n\n{refusal_msg}\n")
+        print("\n📚 Sources:\n\nNone (Out-of-domain query filtered by Domain Gatekeeper)")
+        return {"status": "out_of_domain", "answer": refusal_msg, "sources": []}
+
+    print(f"🔍 Searching for: {', '.join(medical_terms)}")
+
 
     expr = f'lang == "{lang_filter}"' if lang_filter else ""
 
