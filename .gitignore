@@ -4,7 +4,9 @@
 *.local
 
 *.json
+!benchmark_results.json
 pubmed_integrative.json
+*.log
 *.db
 *.sqlite
 

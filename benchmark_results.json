@@ -1,0 +1,25 @@
+{
+  "timestamp": "2026-10-29T17:20:03.184251+00:00",
+  "query": "What are the clinical benefits and mechanisms of omega-3 fatty acids in cardiovascular health?",
+  "ablation_type": "top_k_retrieval",
+  "results": [
+    {
+      "top_k": 3,
+      "status": "ok",
+      "latency_seconds": 9.7,
+      "sources_count": 3
+    },
+    {
+      "top_k": 5,
+      "status": "ok",
+      "latency_seconds": 5.51,
+      "sources_count": 5
+    },
+    {
+      "top_k": 10,
+      "status": "ok",
+      "latency_seconds": 9.96,
+      "sources_count": 10
+    }
+  ]
+}
