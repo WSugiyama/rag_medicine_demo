@@ -1,3 +1,8 @@
+import sys
+import os
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 import time
 import json
 from datetime import datetime, timezone
@@ -36,7 +41,7 @@ def run_benchmark():
         print(f"⏱️ K={k} completed in {duration:.2f}s\n")
 
     # Save results to the golden JSON artifact tracked in Git
-    output_filename = "benchmark_results.json"
+    output_filename = os.path.join(os.path.dirname(__file__), "benchmark_results.json")
     with open(output_filename, "w", encoding="utf-8") as f:
         json.dump(benchmark_data, f, indent=2)
     

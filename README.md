@@ -23,7 +23,6 @@ A lightweight, multilingual Retrieval-Augmented Generation (RAG) prototype for s
 ```bash
 git clone [https://github.com/WSugiyama/rag_medicine_demo.git](https://github.com/WSugiyama/rag_medicine_demo.git)
 cd rag_medicine_demo
-
 ```
 
 ### 2. Install Dependencies
@@ -90,32 +89,50 @@ To maintain high reliability without the latency and cost of heavy LLM-based eva
 
 - **Domain Gatekeeper Pattern:** Non-medical queries (in both English and Indonesian) are intercepted by the term extraction layer and safely return an empty list (`[]`), preventing out-of-domain noise from polluting Milvus vector searches.
 - **Multilingual NER & Regex Hybrid:** Combines spaCy entity recognition with bilingual (English/Indonesian) regex patterns to ensure precise biomedical keyword extraction across languages.
-- **Structural Unit Tests:** Validates citation remapping, sequential integrity, and edge-case resilience with a **100% pass rate** on local test suites, keeping CI/CD feedback loops under 2 seconds.
+- **Structural Unit Tests:** Validates citation remapping, sequential integrity, and edge-case resilience across **6 core test suites** with a **100% pass rate** (~1.8s local feedback loop including spaCy pipeline initialization).
+
 
 #### Running Unit Tests
-You can execute the full test suite or target specific modules using command-line arguments:
+You can execute the full test suite or target specific modules using command-line arguments from the root directory:
 
 ```bash
 # Run all test suites
-python3 test_runner.py --suite all --verbose
+time python3 tests/test_runner.py --suite all
 
 # Run specific functional suites
-python3 test_runner.py --suite indonesian   # Test multilingual extraction
-python3 test_runner.py --suite citations    # Test citation remapping & patterns
-python3 test_runner.py --suite perf         # Run performance benchmarks
+python3 tests/test_runner.py --suite indonesian    # Test multilingual extraction
+python3 tests/test_runner.py --suite citations     # Test citation remapping & patterns
+python3 tests/test_runner.py --suite term_extraction          # Test term extraction coverage
 ```
 
 Test results are automatically serialized into timestamped artifacts (e.g., ```test_results_<timestamp>.json```) for continuous integration tracking.
 
 #### Evaluation of Trade-offs
-Empirical testing reveals that retrieval performance and generation stability are highly dependent on query-type and local cache states. Rather than relying on a static $K$ value, robust production systems require dynamic top-$K$ selection or reranking layers.  See [```benchmark_results.json```](benchmark_results.json).
+Empirical testing reveals that retrieval performance and generation stability are highly dependent on query-type and local cache states. Rather than relying on a static $K$ value, robust production systems require dynamic top-$K$ selection or reranking layers.  See [```benchmarks/benchmark_results.json```](benchmarks/benchmark_results.json).
 
 #### 📊 Empirical Top-$K$ Ablation Results (Local Gemma 2 / Ollama)
-| Top-$K$ | Avg Latency | Behavioral Outcome / Observation |
+| Top-$K$ | Avg Latency* | Behavioral Outcome / Observation |
 | :---: | :---: | :--- |
-| **$K = 3$** | ~9.70s | High precision; graceful handling of narrow contexts. |
-| **$K = 5$** | ~5.51s | Fast token generation via rapid refusal short-circuiting on out-of-scope context matches. |
-| **$K = 10$** | ~9.96s | Broad recall, but susceptible to **context drift** (introducing noisy peripheral papers). |
+| **$K = 3$** | ~9–13s | High precision; susceptible to under-contextualization if top hits miss exact terms. |
+| **$K = 5$** | ~8–10s | Balanced context window; stable extraction across queries. |
+| **$K = 10$** | ~10–13s | Broad recall, but vulnerable to **context drift** and noisy peripheral papers. |
+
+*\*Note: Local inference latencies exhibit run-to-run variance depending on hardware cache state and token generation length.*
+
+
+#### ⚖️ Empirical Hybrid Weight Sweep ($W_{semantic}$ vs $W_{keyword}$)
+An empirical weight sweep across initial test queries indicates a broad performance plateau ($0.30 \le W_{sem} \le 0.85$), where keyword-hybridized retrieval maintains strong lexical containment (@3 ~0.92). Pure vector retrieval ($0.95$) drops when unanchored from explicit entity terms:
+
+| Semantic Weight ($W_{sem}$) | Keyword Weight ($W_{kw}$) | Lexical Proxy Precision@3 | Observation |
+| :---: | :---: | :---: | :--- |
+| **0.30** | 0.70 | ~0.58 | Heavy keyword weight; high lexical hit rate. |
+| **0.50** | 0.50 | ~0.58 | Balanced hybrid weighting. |
+| **0.70** | 0.30 | ~0.58 | Default production configuration. |
+| **0.85** | 0.15 | ~0.58 | Near-pure vector search with minimal keyword constraint. |
+| **0.95** | 0.05 | ~0.50 | Pure vector retrieval; vulnerable to missing entity-dense queries. |
+
+
+See [```benchmarks/weight_sweep_results.json```](benchmarks/weight_sweep_results.json) for full granular execution traces.
 
 ### 🚀 Technical Improvements & Roadmap
 

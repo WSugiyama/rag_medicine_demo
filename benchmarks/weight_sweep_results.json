@@ -1,0 +1,218 @@
+{
+  "What herbal treatments help with inflammation?": [
+    {
+      "semantic_weight": 0.3,
+      "keyword_weight": 0.7,
+      "precision_at_3": 1.0
+    },
+    {
+      "semantic_weight": 0.5,
+      "keyword_weight": 0.5,
+      "precision_at_3": 1.0
+    },
+    {
+      "semantic_weight": 0.7,
+      "keyword_weight": 0.3,
+      "precision_at_3": 1.0
+    },
+    {
+      "semantic_weight": 0.85,
+      "keyword_weight": 0.15,
+      "precision_at_3": 1.0
+    },
+    {
+      "semantic_weight": 0.95,
+      "keyword_weight": 0.05,
+      "precision_at_3": 1.0
+    }
+  ],
+  "How effective are COVID-19 vaccines against new variants?": [
+    {
+      "semantic_weight": 0.3,
+      "keyword_weight": 0.7,
+      "precision_at_3": 1.0
+    },
+    {
+      "semantic_weight": 0.5,
+      "keyword_weight": 0.5,
+      "precision_at_3": 1.0
+    },
+    {
+      "semantic_weight": 0.7,
+      "keyword_weight": 0.3,
+      "precision_at_3": 1.0
+    },
+    {
+      "semantic_weight": 0.85,
+      "keyword_weight": 0.15,
+      "precision_at_3": 1.0
+    },
+    {
+      "semantic_weight": 0.95,
+      "keyword_weight": 0.05,
+      "precision_at_3": 1.0
+    }
+  ],
+  "Can long COVID be treated with probiotics?": [
+    {
+      "semantic_weight": 0.3,
+      "keyword_weight": 0.7,
+      "precision_at_3": 0.6666666666666666
+    },
+    {
+      "semantic_weight": 0.5,
+      "keyword_weight": 0.5,
+      "precision_at_3": 0.6666666666666666
+    },
+    {
+      "semantic_weight": 0.7,
+      "keyword_weight": 0.3,
+      "precision_at_3": 0.6666666666666666
+    },
+    {
+      "semantic_weight": 0.85,
+      "keyword_weight": 0.15,
+      "precision_at_3": 0.6666666666666666
+    },
+    {
+      "semantic_weight": 0.95,
+      "keyword_weight": 0.05,
+      "precision_at_3": 0.0
+    }
+  ],
+  "What are the cardiovascular effects of omega-3 fatty acids?": [
+    {
+      "semantic_weight": 0.3,
+      "keyword_weight": 0.7,
+      "precision_at_3": 1.0
+    },
+    {
+      "semantic_weight": 0.5,
+      "keyword_weight": 0.5,
+      "precision_at_3": 1.0
+    },
+    {
+      "semantic_weight": 0.7,
+      "keyword_weight": 0.3,
+      "precision_at_3": 1.0
+    },
+    {
+      "semantic_weight": 0.85,
+      "keyword_weight": 0.15,
+      "precision_at_3": 1.0
+    },
+    {
+      "semantic_weight": 0.95,
+      "keyword_weight": 0.05,
+      "precision_at_3": 1.0
+    }
+  ],
+  "Bagaimana efektivitas akupunktur untuk meredakan nyeri kronis?": [
+    {
+      "semantic_weight": 0.3,
+      "keyword_weight": 0.7,
+      "precision_at_3": 0.0
+    },
+    {
+      "semantic_weight": 0.5,
+      "keyword_weight": 0.5,
+      "precision_at_3": 0.0
+    },
+    {
+      "semantic_weight": 0.7,
+      "keyword_weight": 0.3,
+      "precision_at_3": 0.0
+    },
+    {
+      "semantic_weight": 0.85,
+      "keyword_weight": 0.15,
+      "precision_at_3": 0.0
+    },
+    {
+      "semantic_weight": 0.95,
+      "keyword_weight": 0.05,
+      "precision_at_3": 0.0
+    }
+  ],
+  "What are the molecular targets of turmeric in cancer therapy?": [
+    {
+      "semantic_weight": 0.3,
+      "keyword_weight": 0.7,
+      "precision_at_3": 1.0
+    },
+    {
+      "semantic_weight": 0.5,
+      "keyword_weight": 0.5,
+      "precision_at_3": 1.0
+    },
+    {
+      "semantic_weight": 0.7,
+      "keyword_weight": 0.3,
+      "precision_at_3": 1.0
+    },
+    {
+      "semantic_weight": 0.85,
+      "keyword_weight": 0.15,
+      "precision_at_3": 1.0
+    },
+    {
+      "semantic_weight": 0.95,
+      "keyword_weight": 0.05,
+      "precision_at_3": 1.0
+    }
+  ],
+  "Can vitamin D supplementation reduce respiratory infections?": [
+    {
+      "semantic_weight": 0.3,
+      "keyword_weight": 0.7,
+      "precision_at_3": 0.0
+    },
+    {
+      "semantic_weight": 0.5,
+      "keyword_weight": 0.5,
+      "precision_at_3": 0.0
+    },
+    {
+      "semantic_weight": 0.7,
+      "keyword_weight": 0.3,
+      "precision_at_3": 0.0
+    },
+    {
+      "semantic_weight": 0.85,
+      "keyword_weight": 0.15,
+      "precision_at_3": 0.0
+    },
+    {
+      "semantic_weight": 0.95,
+      "keyword_weight": 0.05,
+      "precision_at_3": 0.0
+    }
+  ],
+  "What mechanisms link gut microbiota to metabolic syndrome?": [
+    {
+      "semantic_weight": 0.3,
+      "keyword_weight": 0.7,
+      "precision_at_3": 0.0
+    },
+    {
+      "semantic_weight": 0.5,
+      "keyword_weight": 0.5,
+      "precision_at_3": 0.0
+    },
+    {
+      "semantic_weight": 0.7,
+      "keyword_weight": 0.3,
+      "precision_at_3": 0.0
+    },
+    {
+      "semantic_weight": 0.85,
+      "keyword_weight": 0.15,
+      "precision_at_3": 0.0
+    },
+    {
+      "semantic_weight": 0.95,
+      "keyword_weight": 0.05,
+      "precision_at_3": 0.0
+    }
+  ]
+}

@@ -4,13 +4,16 @@
 *.local
 
 *.json
-!benchmark_results.json
+!benchmarks/benchmark_results.json
+!benchmarks/weight_sweep_results.json
 pubmed_integrative.json
+tests/test_results_*.json
 *.log
 *.db
 *.sqlite
 
 __pycache__/
+tests/__pycache__/
 *.pyc
 .DS_Store
 data/*
