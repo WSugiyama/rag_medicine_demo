@@ -133,7 +133,6 @@ class RAGSystemTest(unittest.TestCase):
             f"Term extraction accuracy {accuracy:.1%} below threshold {PERFORMANCE_BENCHMARKS['term_extraction_accuracy']:.1%}"
         )
         
-        # 🛑 FIXED: Renamed label from 'Performance Benchmark' to accurately reflect a smoke test
         self.print_result(
             "Term Extraction Coverage", "PASS", 
             f"Term extraction success: {term_success}/{len(all_queries)} ({accuracy:.1%})"
