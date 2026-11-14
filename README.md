@@ -107,32 +107,36 @@ python3 tests/test_runner.py --suite term_extraction          # Test term extrac
 
 Test results are automatically serialized into timestamped artifacts (e.g., ```test_results_<timestamp>.json```) for continuous integration tracking.
 
-#### Evaluation of Trade-offs
-Empirical testing reveals that retrieval performance and generation stability are highly dependent on query-type and local cache states. Rather than relying on a static $K$ value, robust production systems require dynamic top-$K$ selection or reranking layers.  See [```benchmarks/benchmark_results.json```](benchmarks/benchmark_results.json).
 
-#### 📊 Empirical Top-$K$ Ablation Results (Local Gemma 2 / Ollama)
-| Top-$K$ | Avg Latency* | Behavioral Outcome / Observation |
-| :---: | :---: | :--- |
-| **$K = 3$** | ~9–13s | High precision; susceptible to under-contextualization if top hits miss exact terms. |
-| **$K = 5$** | ~8–10s | Balanced context window; stable extraction across queries. |
-| **$K = 10$** | ~10–13s | Broad recall, but vulnerable to **context drift** and noisy peripheral papers. |
+#### Evaluation of Trade-offs & Empirical Findings
 
-*\*Note: Local inference latencies exhibit run-to-run variance depending on hardware cache state and token generation length.*
+An ablation study across $n=8$ stratified queries ($repeats=5$) surfaced key architectural insights and limitations:
 
+1. **Cross-Lingual Retrieval Disparity:** English queries consistently achieved high precision (Precision@3 $\approx 1.0$), whereas Indonesian queries underperformed severely ($0.67$ and $0.0$). This highlights a cross-lingual semantic alignment bottleneck when using general embedding models (`nomic-embed-text`) on English-skewed biomedical corpora.
+2. **Rank Invariance ($W_{sem} \in [0.3, 0.7]$):** Precision@3 and the resulting top-$3$ context sets remained entirely identical across this range. This indicates that the keyword component is currently inert in altering rank order over standard blending weights due to vector score magnitude dominance.
+3. **Extreme Boundary Drop ($W_{sem} = 0.95$):** A precision drop was observed at the extreme upper bound, though this behavior is currently isolated to a single query instance ($n=1$) and requires broader validation before drawing general conclusions.
 
-#### ⚖️ Empirical Hybrid Weight Sweep ($W_{semantic}$ vs $W_{keyword}$)
-An empirical weight sweep across initial test queries indicates a broad performance plateau ($0.30 \le W_{sem} \le 0.85$), where keyword-hybridized retrieval maintains strong lexical containment (@3 ~0.92). Pure vector retrieval ($0.95$) drops when unanchored from explicit entity terms:
+See [`benchmarks/weight_sweep_results.json`](benchmarks/weight_sweep_results.json) for full granular execution traces.
 
-| Semantic Weight ($W_{sem}$) | Keyword Weight ($W_{kw}$) | Lexical Proxy Precision@3 | Observation |
+#### 📊 Hybrid Weight Sweep Precision@3 ($n=8$ Queries)
+| Semantic Weight ($W_{sem}$) | Keyword Weight ($W_{kw}$) | Mean Precision@3 | Observation |
 | :---: | :---: | :---: | :--- |
-| **0.30** | 0.70 | ~0.58 | Heavy keyword weight; high lexical hit rate. |
-| **0.50** | 0.50 | ~0.58 | Balanced hybrid weighting. |
-| **0.70** | 0.30 | ~0.58 | Default production configuration. |
-| **0.85** | 0.15 | ~0.58 | Near-pure vector search with minimal keyword constraint. |
-| **0.95** | 0.05 | ~0.50 | Pure vector retrieval; vulnerable to missing entity-dense queries. |
+| **0.30** | 0.70 | ~0.79 | Heavy keyword weight; identical top-3 ranking output. |
+| **0.50** | 0.50 | ~0.79 | Balanced hybrid weighting (rank-invariant to $0.3$). |
+| **0.70** | 0.30 | ~0.79 | Standard experimental configuration. |
+| **0.85** | 0.15 | ~0.79 | Near-pure vector search plateau. |
+| **0.95** | 0.05 | ~0.71 | Single-query drop driven by loss of lexical constraint ($n=1$). |
 
 
-See [```benchmarks/weight_sweep_results.json```](benchmarks/weight_sweep_results.json) for full granular execution traces.
+#### 📊 Split Latency & Top-$K$ Ablation Results (Local Prototype, Split Timing)
+| Top-$K$ | End-to-End Retrieval Median | Generation Median (Local LLM) | Avg Tokens | Observed Trend / Hypothesis |
+| :---: | :---: | :---: | :---: | :--- |
+| **$K = 3$** | **0.0281s** (~28 ms) | **1.237s** | 28.7 | **Hypothesis:** Compact context window yields high precision with minimal token generation. |
+| **$K = 5$** | **0.0294s** (~29 ms) | **5.817s** | 104.0 | **Observation:** Balanced context window; stable extraction across queries. |
+| **$K = 10$** | **0.0329s** (~33 ms) | **6.831s** | 202.7 | **Hypothesis:** Broader recall increases context size, amplifying generation latency and token output. |
+
+**Note**: Local inference latencies exhibit run-to-run variance depending on hardware cache state and token generation length.
+
 
 ### 🚀 Technical Improvements & Roadmap
 

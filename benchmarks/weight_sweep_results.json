@@ -1,218 +1,512 @@
 {
-  "What herbal treatments help with inflammation?": [
-    {
-      "semantic_weight": 0.3,
-      "keyword_weight": 0.7,
-      "precision_at_3": 1.0
-    },
-    {
-      "semantic_weight": 0.5,
-      "keyword_weight": 0.5,
-      "precision_at_3": 1.0
-    },
-    {
-      "semantic_weight": 0.7,
-      "keyword_weight": 0.3,
-      "precision_at_3": 1.0
-    },
-    {
-      "semantic_weight": 0.85,
-      "keyword_weight": 0.15,
-      "precision_at_3": 1.0
-    },
-    {
-      "semantic_weight": 0.95,
-      "keyword_weight": 0.05,
-      "precision_at_3": 1.0
-    }
+  "timestamp": "2026-11-13T17:23:08.063681+00:00",
+  "queries_tested": [
+    "What are the benefits of probiotics for digestive health?",
+    "How do anti-inflammatory herbs help with arthritis?",
+    "What natural treatments are effective for anxiety?",
+    "How does meditation affect immune system function?",
+    "Apa saja gejala utama dari infeksi COVID-19?",
+    "Bagaimana efektivitas vaksin terhadap varian baru?",
+    "How do probiotics interact with COVID-19 vaccines and what are the implications for immune response?",
+    "Can traditional Chinese medicine approaches combined with modern antivirals improve COVID-19 outcomes?"
   ],
-  "How effective are COVID-19 vaccines against new variants?": [
-    {
-      "semantic_weight": 0.3,
-      "keyword_weight": 0.7,
-      "precision_at_3": 1.0
-    },
-    {
-      "semantic_weight": 0.5,
-      "keyword_weight": 0.5,
-      "precision_at_3": 1.0
-    },
-    {
-      "semantic_weight": 0.7,
-      "keyword_weight": 0.3,
-      "precision_at_3": 1.0
-    },
-    {
-      "semantic_weight": 0.85,
-      "keyword_weight": 0.15,
-      "precision_at_3": 1.0
-    },
-    {
-      "semantic_weight": 0.95,
-      "keyword_weight": 0.05,
-      "precision_at_3": 1.0
-    }
-  ],
-  "Can long COVID be treated with probiotics?": [
-    {
-      "semantic_weight": 0.3,
-      "keyword_weight": 0.7,
-      "precision_at_3": 0.6666666666666666
-    },
-    {
-      "semantic_weight": 0.5,
-      "keyword_weight": 0.5,
-      "precision_at_3": 0.6666666666666666
-    },
-    {
-      "semantic_weight": 0.7,
-      "keyword_weight": 0.3,
-      "precision_at_3": 0.6666666666666666
-    },
-    {
-      "semantic_weight": 0.85,
-      "keyword_weight": 0.15,
-      "precision_at_3": 0.6666666666666666
-    },
-    {
-      "semantic_weight": 0.95,
-      "keyword_weight": 0.05,
-      "precision_at_3": 0.0
-    }
-  ],
-  "What are the cardiovascular effects of omega-3 fatty acids?": [
-    {
-      "semantic_weight": 0.3,
-      "keyword_weight": 0.7,
-      "precision_at_3": 1.0
-    },
-    {
-      "semantic_weight": 0.5,
-      "keyword_weight": 0.5,
-      "precision_at_3": 1.0
-    },
-    {
-      "semantic_weight": 0.7,
-      "keyword_weight": 0.3,
-      "precision_at_3": 1.0
-    },
-    {
-      "semantic_weight": 0.85,
-      "keyword_weight": 0.15,
-      "precision_at_3": 1.0
-    },
-    {
-      "semantic_weight": 0.95,
-      "keyword_weight": 0.05,
-      "precision_at_3": 1.0
-    }
-  ],
-  "Bagaimana efektivitas akupunktur untuk meredakan nyeri kronis?": [
-    {
-      "semantic_weight": 0.3,
-      "keyword_weight": 0.7,
-      "precision_at_3": 0.0
-    },
-    {
-      "semantic_weight": 0.5,
-      "keyword_weight": 0.5,
-      "precision_at_3": 0.0
-    },
-    {
-      "semantic_weight": 0.7,
-      "keyword_weight": 0.3,
-      "precision_at_3": 0.0
-    },
-    {
-      "semantic_weight": 0.85,
-      "keyword_weight": 0.15,
-      "precision_at_3": 0.0
-    },
-    {
-      "semantic_weight": 0.95,
-      "keyword_weight": 0.05,
-      "precision_at_3": 0.0
-    }
-  ],
-  "What are the molecular targets of turmeric in cancer therapy?": [
-    {
-      "semantic_weight": 0.3,
-      "keyword_weight": 0.7,
-      "precision_at_3": 1.0
-    },
-    {
-      "semantic_weight": 0.5,
-      "keyword_weight": 0.5,
-      "precision_at_3": 1.0
-    },
-    {
-      "semantic_weight": 0.7,
-      "keyword_weight": 0.3,
-      "precision_at_3": 1.0
-    },
-    {
-      "semantic_weight": 0.85,
-      "keyword_weight": 0.15,
-      "precision_at_3": 1.0
-    },
-    {
-      "semantic_weight": 0.95,
-      "keyword_weight": 0.05,
-      "precision_at_3": 1.0
-    }
-  ],
-  "Can vitamin D supplementation reduce respiratory infections?": [
-    {
-      "semantic_weight": 0.3,
-      "keyword_weight": 0.7,
-      "precision_at_3": 0.0
-    },
-    {
-      "semantic_weight": 0.5,
-      "keyword_weight": 0.5,
-      "precision_at_3": 0.0
-    },
-    {
-      "semantic_weight": 0.7,
-      "keyword_weight": 0.3,
-      "precision_at_3": 0.0
-    },
-    {
-      "semantic_weight": 0.85,
-      "keyword_weight": 0.15,
-      "precision_at_3": 0.0
-    },
-    {
-      "semantic_weight": 0.95,
-      "keyword_weight": 0.05,
-      "precision_at_3": 0.0
-    }
-  ],
-  "What mechanisms link gut microbiota to metabolic syndrome?": [
-    {
-      "semantic_weight": 0.3,
-      "keyword_weight": 0.7,
-      "precision_at_3": 0.0
-    },
-    {
-      "semantic_weight": 0.5,
-      "keyword_weight": 0.5,
-      "precision_at_3": 0.0
-    },
-    {
-      "semantic_weight": 0.7,
-      "keyword_weight": 0.3,
-      "precision_at_3": 0.0
-    },
-    {
-      "semantic_weight": 0.85,
-      "keyword_weight": 0.15,
-      "precision_at_3": 0.0
-    },
-    {
-      "semantic_weight": 0.95,
-      "keyword_weight": 0.05,
-      "precision_at_3": 0.0
-    }
-  ]
+  "repeats_per_weight": 5,
+  "results": {
+    "What are the benefits of probiotics for digestive health?": [
+      {
+        "semantic_weight": 0.3,
+        "keyword_weight": 0.7,
+        "precision_at_3": 1.0,
+        "metrics": {
+          "median_latency_seconds": 0.003,
+          "iqr_latency_seconds": 0.001,
+          "avg_tokens_generated": 1051.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      },
+      {
+        "semantic_weight": 0.5,
+        "keyword_weight": 0.5,
+        "precision_at_3": 1.0,
+        "metrics": {
+          "median_latency_seconds": 0.003,
+          "iqr_latency_seconds": 0.0,
+          "avg_tokens_generated": 1051.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      },
+      {
+        "semantic_weight": 0.7,
+        "keyword_weight": 0.3,
+        "precision_at_3": 1.0,
+        "metrics": {
+          "median_latency_seconds": 0.003,
+          "iqr_latency_seconds": 0.001,
+          "avg_tokens_generated": 1051.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      },
+      {
+        "semantic_weight": 0.85,
+        "keyword_weight": 0.15,
+        "precision_at_3": 0.3333333333333333,
+        "metrics": {
+          "median_latency_seconds": 0.005,
+          "iqr_latency_seconds": 0.001,
+          "avg_tokens_generated": 1221.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      },
+      {
+        "semantic_weight": 0.95,
+        "keyword_weight": 0.05,
+        "precision_at_3": 0.3333333333333333,
+        "metrics": {
+          "median_latency_seconds": 0.003,
+          "iqr_latency_seconds": 0.001,
+          "avg_tokens_generated": 1221.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      }
+    ],
+    "How do anti-inflammatory herbs help with arthritis?": [
+      {
+        "semantic_weight": 0.3,
+        "keyword_weight": 0.7,
+        "precision_at_3": 1.0,
+        "metrics": {
+          "median_latency_seconds": 0.003,
+          "iqr_latency_seconds": 0.0,
+          "avg_tokens_generated": 1709.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      },
+      {
+        "semantic_weight": 0.5,
+        "keyword_weight": 0.5,
+        "precision_at_3": 1.0,
+        "metrics": {
+          "median_latency_seconds": 0.002,
+          "iqr_latency_seconds": 0.001,
+          "avg_tokens_generated": 1709.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      },
+      {
+        "semantic_weight": 0.7,
+        "keyword_weight": 0.3,
+        "precision_at_3": 1.0,
+        "metrics": {
+          "median_latency_seconds": 0.001,
+          "iqr_latency_seconds": 0.0,
+          "avg_tokens_generated": 1709.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      },
+      {
+        "semantic_weight": 0.85,
+        "keyword_weight": 0.15,
+        "precision_at_3": 1.0,
+        "metrics": {
+          "median_latency_seconds": 0.001,
+          "iqr_latency_seconds": 0.0,
+          "avg_tokens_generated": 1625.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      },
+      {
+        "semantic_weight": 0.95,
+        "keyword_weight": 0.05,
+        "precision_at_3": 1.0,
+        "metrics": {
+          "median_latency_seconds": 0.001,
+          "iqr_latency_seconds": 0.0,
+          "avg_tokens_generated": 1625.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      }
+    ],
+    "What natural treatments are effective for anxiety?": [
+      {
+        "semantic_weight": 0.3,
+        "keyword_weight": 0.7,
+        "precision_at_3": 1.0,
+        "metrics": {
+          "median_latency_seconds": 0.002,
+          "iqr_latency_seconds": 0.0,
+          "avg_tokens_generated": 915.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      },
+      {
+        "semantic_weight": 0.5,
+        "keyword_weight": 0.5,
+        "precision_at_3": 1.0,
+        "metrics": {
+          "median_latency_seconds": 0.002,
+          "iqr_latency_seconds": 0.001,
+          "avg_tokens_generated": 915.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      },
+      {
+        "semantic_weight": 0.7,
+        "keyword_weight": 0.3,
+        "precision_at_3": 1.0,
+        "metrics": {
+          "median_latency_seconds": 0.002,
+          "iqr_latency_seconds": 0.0,
+          "avg_tokens_generated": 1138.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      },
+      {
+        "semantic_weight": 0.85,
+        "keyword_weight": 0.15,
+        "precision_at_3": 1.0,
+        "metrics": {
+          "median_latency_seconds": 0.001,
+          "iqr_latency_seconds": 0.0,
+          "avg_tokens_generated": 1138.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      },
+      {
+        "semantic_weight": 0.95,
+        "keyword_weight": 0.05,
+        "precision_at_3": 0.3333333333333333,
+        "metrics": {
+          "median_latency_seconds": 0.001,
+          "iqr_latency_seconds": 0.0,
+          "avg_tokens_generated": 1040.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      }
+    ],
+    "How does meditation affect immune system function?": [
+      {
+        "semantic_weight": 0.3,
+        "keyword_weight": 0.7,
+        "precision_at_3": 1.0,
+        "metrics": {
+          "median_latency_seconds": 0.002,
+          "iqr_latency_seconds": 0.0,
+          "avg_tokens_generated": 1217.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      },
+      {
+        "semantic_weight": 0.5,
+        "keyword_weight": 0.5,
+        "precision_at_3": 1.0,
+        "metrics": {
+          "median_latency_seconds": 0.002,
+          "iqr_latency_seconds": 0.001,
+          "avg_tokens_generated": 1217.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      },
+      {
+        "semantic_weight": 0.7,
+        "keyword_weight": 0.3,
+        "precision_at_3": 1.0,
+        "metrics": {
+          "median_latency_seconds": 0.002,
+          "iqr_latency_seconds": 0.0,
+          "avg_tokens_generated": 1217.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      },
+      {
+        "semantic_weight": 0.85,
+        "keyword_weight": 0.15,
+        "precision_at_3": 1.0,
+        "metrics": {
+          "median_latency_seconds": 0.002,
+          "iqr_latency_seconds": 0.0,
+          "avg_tokens_generated": 1217.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      },
+      {
+        "semantic_weight": 0.95,
+        "keyword_weight": 0.05,
+        "precision_at_3": 1.0,
+        "metrics": {
+          "median_latency_seconds": 0.002,
+          "iqr_latency_seconds": 0.0,
+          "avg_tokens_generated": 1217.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      }
+    ],
+    "Apa saja gejala utama dari infeksi COVID-19?": [
+      {
+        "semantic_weight": 0.3,
+        "keyword_weight": 0.7,
+        "precision_at_3": 0.6666666666666666,
+        "metrics": {
+          "median_latency_seconds": 0.003,
+          "iqr_latency_seconds": 0.002,
+          "avg_tokens_generated": 1357.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      },
+      {
+        "semantic_weight": 0.5,
+        "keyword_weight": 0.5,
+        "precision_at_3": 0.6666666666666666,
+        "metrics": {
+          "median_latency_seconds": 0.002,
+          "iqr_latency_seconds": 0.0,
+          "avg_tokens_generated": 1357.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      },
+      {
+        "semantic_weight": 0.7,
+        "keyword_weight": 0.3,
+        "precision_at_3": 0.6666666666666666,
+        "metrics": {
+          "median_latency_seconds": 0.002,
+          "iqr_latency_seconds": 0.0,
+          "avg_tokens_generated": 1357.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      },
+      {
+        "semantic_weight": 0.85,
+        "keyword_weight": 0.15,
+        "precision_at_3": 0.6666666666666666,
+        "metrics": {
+          "median_latency_seconds": 0.002,
+          "iqr_latency_seconds": 0.0,
+          "avg_tokens_generated": 1357.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      },
+      {
+        "semantic_weight": 0.95,
+        "keyword_weight": 0.05,
+        "precision_at_3": 0.3333333333333333,
+        "metrics": {
+          "median_latency_seconds": 0.002,
+          "iqr_latency_seconds": 0.0,
+          "avg_tokens_generated": 1547.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      }
+    ],
+    "Bagaimana efektivitas vaksin terhadap varian baru?": [
+      {
+        "semantic_weight": 0.3,
+        "keyword_weight": 0.7,
+        "precision_at_3": 0.0,
+        "metrics": {
+          "median_latency_seconds": 0.003,
+          "iqr_latency_seconds": 0.001,
+          "avg_tokens_generated": 1509.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      },
+      {
+        "semantic_weight": 0.5,
+        "keyword_weight": 0.5,
+        "precision_at_3": 0.0,
+        "metrics": {
+          "median_latency_seconds": 0.002,
+          "iqr_latency_seconds": 0.0,
+          "avg_tokens_generated": 1509.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      },
+      {
+        "semantic_weight": 0.7,
+        "keyword_weight": 0.3,
+        "precision_at_3": 0.0,
+        "metrics": {
+          "median_latency_seconds": 0.003,
+          "iqr_latency_seconds": 0.001,
+          "avg_tokens_generated": 1509.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      },
+      {
+        "semantic_weight": 0.85,
+        "keyword_weight": 0.15,
+        "precision_at_3": 0.0,
+        "metrics": {
+          "median_latency_seconds": 0.002,
+          "iqr_latency_seconds": 0.0,
+          "avg_tokens_generated": 1509.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      },
+      {
+        "semantic_weight": 0.95,
+        "keyword_weight": 0.05,
+        "precision_at_3": 0.0,
+        "metrics": {
+          "median_latency_seconds": 0.002,
+          "iqr_latency_seconds": 0.0,
+          "avg_tokens_generated": 1509.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      }
+    ],
+    "How do probiotics interact with COVID-19 vaccines and what are the implications for immune response?": [
+      {
+        "semantic_weight": 0.3,
+        "keyword_weight": 0.7,
+        "precision_at_3": 1.0,
+        "metrics": {
+          "median_latency_seconds": 0.003,
+          "iqr_latency_seconds": 0.001,
+          "avg_tokens_generated": 1521.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      },
+      {
+        "semantic_weight": 0.5,
+        "keyword_weight": 0.5,
+        "precision_at_3": 1.0,
+        "metrics": {
+          "median_latency_seconds": 0.001,
+          "iqr_latency_seconds": 0.0,
+          "avg_tokens_generated": 1521.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      },
+      {
+        "semantic_weight": 0.7,
+        "keyword_weight": 0.3,
+        "precision_at_3": 1.0,
+        "metrics": {
+          "median_latency_seconds": 0.002,
+          "iqr_latency_seconds": 0.0,
+          "avg_tokens_generated": 1521.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      },
+      {
+        "semantic_weight": 0.85,
+        "keyword_weight": 0.15,
+        "precision_at_3": 1.0,
+        "metrics": {
+          "median_latency_seconds": 0.002,
+          "iqr_latency_seconds": 0.0,
+          "avg_tokens_generated": 1425.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      },
+      {
+        "semantic_weight": 0.95,
+        "keyword_weight": 0.05,
+        "precision_at_3": 0.3333333333333333,
+        "metrics": {
+          "median_latency_seconds": 0.002,
+          "iqr_latency_seconds": 0.0,
+          "avg_tokens_generated": 1820.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      }
+    ],
+    "Can traditional Chinese medicine approaches combined with modern antivirals improve COVID-19 outcomes?": [
+      {
+        "semantic_weight": 0.3,
+        "keyword_weight": 0.7,
+        "precision_at_3": 1.0,
+        "metrics": {
+          "median_latency_seconds": 0.003,
+          "iqr_latency_seconds": 0.0,
+          "avg_tokens_generated": 1148.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      },
+      {
+        "semantic_weight": 0.5,
+        "keyword_weight": 0.5,
+        "precision_at_3": 1.0,
+        "metrics": {
+          "median_latency_seconds": 0.002,
+          "iqr_latency_seconds": 0.0,
+          "avg_tokens_generated": 1148.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      },
+      {
+        "semantic_weight": 0.7,
+        "keyword_weight": 0.3,
+        "precision_at_3": 1.0,
+        "metrics": {
+          "median_latency_seconds": 0.002,
+          "iqr_latency_seconds": 0.0,
+          "avg_tokens_generated": 1148.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      },
+      {
+        "semantic_weight": 0.85,
+        "keyword_weight": 0.15,
+        "precision_at_3": 1.0,
+        "metrics": {
+          "median_latency_seconds": 0.002,
+          "iqr_latency_seconds": 0.0,
+          "avg_tokens_generated": 1148.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      },
+      {
+        "semantic_weight": 0.95,
+        "keyword_weight": 0.05,
+        "precision_at_3": 1.0,
+        "metrics": {
+          "median_latency_seconds": 0.002,
+          "iqr_latency_seconds": 0.0,
+          "avg_tokens_generated": 1148.0,
+          "total_trials_recorded": 4,
+          "warmup_discarded": true
+        }
+      }
+    ]
+  }
 }

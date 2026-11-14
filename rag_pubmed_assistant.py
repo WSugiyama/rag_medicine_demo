@@ -189,8 +189,13 @@ def filter_results_by_relevance(results, query, medical_terms, semantic_weight, 
                 keyword_score += 1  # Title match
         
         # Hybrid score: combine semantic and keyword relevance
-        # Weight semantic similarity more heavily (70%) than keyword matching (30%)
-        hybrid_score = semantic_weight * semantic_score + keyword_weight * (keyword_score / len(medical_terms))
+        # Normalized keyword component (Strictly bounded [0.0, 1.0])
+        max_possible_keyword_score = len(medical_terms) * 3
+        keyword_component = keyword_score / max_possible_keyword_score if max_possible_keyword_score > 0 else 0.0
+
+        # Clean hybrid score combination
+        hybrid_score = semantic_weight * semantic_score + keyword_weight * keyword_component
+
         
         scored_results.append((r, hybrid_score))
     
