@@ -1,4 +1,3 @@
-
 import os
 import json
 from Bio import Entrez
@@ -6,30 +5,28 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Set email and optional API key
 Entrez.email = os.getenv("NCBI_EMAIL")
 # Entrez.api_key = os.getenv("NCBI_API_KEY", None)
 
-# Check to make sure it loaded properly
 if not Entrez.email:
     raise ValueError("❌ NCBI_EMAIL is missing from your environment or .env file!")
 
-
-def fetch_pubmed(query, max_results=1024, batch_size=200):
+def fetch_pubmed(query, max_results=250, batch_size=100):
     print(f"🔍 Searching PubMed for query: '{query}' (Target max: {max_results})")
     
-    # 1. Search for all matching IDs
-    handle = Entrez.esearch(db="pubmed", term=query, retmax=max_results)
-    record = Entrez.read(handle)
-    handle.close()
+    try:
+        handle = Entrez.esearch(db="pubmed", term=query, retmax=max_results)
+        record = Entrez.read(handle)
+        handle.close()
+    except Exception as e:
+        print(f"⚠️ Search error for '{query}': {e}")
+        return []
     
-    ids = record["IdList"]
+    ids = record.get("IdList", [])
     total_ids = len(ids)
-    print(f"📄 Found {total_ids} total articles matching query. Fetching details in chunks of {batch_size}...")
+    print(f"📄 Found {total_ids} articles for '{query}'. Fetching details...")
     
     results = []
-
-    # 2. Fetch records in chunks to prevent NCBI payload/URL length limits
     for i in range(0, total_ids, batch_size):
         chunk_ids = ids[i:i + batch_size]
         chunk_num = (i // batch_size) + 1
@@ -48,16 +45,14 @@ def fetch_pubmed(query, max_results=1024, batch_size=200):
                     article_info = medline["Article"]
                     
                     title = article_info.get("ArticleTitle", "No Title")
-                    pmid = medline["PMID"]
+                    pmid = str(medline["PMID"])
                     
-                    # Handle structured abstracts (e.g., Background, Methods, Results, Conclusions)
                     abstract_text = ""
                     if "Abstract" in article_info and "AbstractText" in article_info["Abstract"]:
                         abstract_elements = article_info["Abstract"]["AbstractText"]
-                        # Some elements might have labels (e.g., Label='BACKGROUND')
                         parts = []
                         for elem in abstract_elements:
-                            label = elem.attributes.get("Label", "")
+                            label = elem.attributes.get("Label", "") if hasattr(elem, "attributes") else ""
                             text = str(elem)
                             if label:
                                 parts.append(f"{label}: {text}")
@@ -65,47 +60,74 @@ def fetch_pubmed(query, max_results=1024, batch_size=200):
                                 parts.append(text)
                         abstract_text = " ".join(parts)
                     
-                    # Extract language
                     lang = article_info.get("Language", ["en"])[0]
                     
-                    # Extract DOI if available
                     doi = None
                     if "PubmedData" in article and "ArticleIdList" in article["PubmedData"]:
                         for article_id in article["PubmedData"]["ArticleIdList"]:
-                            if article_id.attributes.get("IdType") == "doi":
+                            if hasattr(article_id, "attributes") and article_id.attributes.get("IdType") == "doi":
                                 doi = str(article_id)
                                 break
                     
-                    if abstract_text:  # Only add if an abstract actually exists
+                    if abstract_text:
                         results.append({
-                            "pmid": str(pmid),
+                            "pmid": pmid,
                             "title": str(title),
                             "abstract": abstract_text,
                             "lang": str(lang),
                             "doi": doi
                         })
-                except Exception as inner_e:
-                    # Skip malformed individual articles without crashing the batch
+                except Exception:
                     continue
-                    
         except Exception as batch_e:
             print(f"⚠️ Error fetching batch {chunk_num}: {batch_e}")
             continue
 
-    print(f"✅ Successfully extracted {len(results)} valid articles with abstracts.")
+    print(f"✅ Successfully extracted {len(results)} valid articles for query: '{query}'.")
     return results
 
 if __name__ == "__main__":
-    # Example usage for large dataset generation
-    data = fetch_pubmed("integrative medicine", max_results=512, batch_size=200)
+    # Multi-domain query expansion to cover test_config.py requirements
+    target_queries = [
+        "integrative medicine",
+        "COVID-19 treatment symptoms variants",
+        "probiotics gut microbiome digestive health",
+        "anti-inflammatory herbs arthritis turmeric",
+        "meditation anxiety depression mental health",
+        "antibiotics side effects clinical",
+        "acupuncture chronic pain management",
+        "omega-3 fatty acids heart health",
+        "infeksi saluran pernapasan gejala",
+        "faktor risiko kardiovaskular"
+    ]
 
-    # Save to JSON
+
     output_filename = "pubmed_integrative.json"
-    with open(output_filename, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
-    print(f"💾 Saved dataset to {output_filename}")
+    
+    # Load existing records if they exist to avoid overwriting
+    existing_data = []
+    seen_pmids = set()
+    if os.path.exists(output_filename):
+        try:
+            with open(output_filename, "r", encoding="utf-8") as f:
+                existing_data = json.load(f)
+                seen_pmids = {item["pmid"] for item in existing_data}
+            print(f"📂 Loaded existing dataset with {len(existing_data)} records.")
+        except Exception as e:
+            print(f"⚠️ Could not read existing file, starting fresh: {e}")
 
-    # Preview first few items
-    for item in data[:3]:
-        print(f"\n🧠 {item['title']} [{item['lang']}] (PMID: {item['pmid']})\n{item['abstract'][:200]}...")
+    new_records_count = 0
+    for q in target_queries:
+        batch_results = fetch_pubmed(q, max_results=200, batch_size=100)
+        for item in batch_results:
+            if item["pmid"] not in seen_pmids:
+                seen_pmids.add(item["pmid"])
+                existing_data.append(item)
+                new_records_count += 1
+
+    # Save expanded dataset
+    with open(output_filename, "w", encoding="utf-8") as f:
+        json.dump(existing_data, f, ensure_ascii=False, indent=2)
+        
+    print(f"\n💾 Saved expanded dataset. Added {new_records_count} new articles. Total corpus size: {len(existing_data)}")
 

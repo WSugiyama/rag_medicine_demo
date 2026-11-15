@@ -163,45 +163,90 @@ def compute_dynamic_weights(query, medical_terms, initial_distances):
     return semantic_weight, keyword_weight
 
 
-# Helper: Filter results by relevance
-def filter_results_by_relevance(results, query, medical_terms, semantic_weight, keyword_weight):
-    """Filter results using hybrid approach: semantic similarity + keyword relevance"""
+# Helper: Filter results using true weighted linear blending (preserves weight sweep)
+def filter_results_by_relevance(results, query, medical_terms, semantic_weight=0.7, keyword_weight=0.3):
+    """Blends semantic and keyword scores proportionally using active weight parameters."""
+    if not results:
+        return results  
+    
     if not medical_terms:
-        return results  # Return all if no medical terms extracted
-    
+        # Fallback to pure semantic sort if no medical terms extracted
+        sorted_res = sorted(results, key=lambda r: r.distance)
+        return sorted_res
+
     scored_results = []
-    query_lower = query.lower()
+    semantic_scores = []
+    keyword_scores = []
     
+    # 1. Collect raw scores
     for r in results:
         entity = r.entity
         abstract = getattr(entity, "abstract", "").lower()
         title = getattr(entity, "title", "").lower()
         
-        # Semantic similarity score (from Milvus)
-        semantic_score = 1.0 - r.distance  # Convert distance to similarity
+        sem_score = 1.0 - r.distance
+        semantic_scores.append(sem_score)
         
-        # Keyword relevance score
-        keyword_score = 0
-        for term in medical_terms:
-            if term in abstract:
-                keyword_score += 2  # Abstract match is more important
-            if term in title:
-                keyword_score += 1  # Title match
+        kw_hits = sum(2 for t in medical_terms if t in abstract) + sum(1 for t in medical_terms if t in title)
+        keyword_scores.append(kw_hits)
         
-        # Hybrid score: combine semantic and keyword relevance
-        # Normalized keyword component (Strictly bounded [0.0, 1.0])
-        max_possible_keyword_score = len(medical_terms) * 3
-        keyword_component = keyword_score / max_possible_keyword_score if max_possible_keyword_score > 0 else 0.0
-
-        # Clean hybrid score combination
-        hybrid_score = semantic_weight * semantic_score + keyword_weight * keyword_component
-
+    # 2. Normalize both components to [0.0, 1.0] so weights actually govern influence
+    sem_min, sem_max = min(semantic_scores), max(semantic_scores)
+    kw_min, kw_max = min(keyword_scores), max(keyword_scores)
+    
+    sem_range = sem_max - sem_min if sem_max > sem_min else 1.0
+    kw_range = kw_max - kw_min if kw_max > kw_min else 1.0
+    
+    for i, r in enumerate(results):
+        norm_sem = (semantic_scores[i] - sem_min) / sem_range
+        norm_kw = (keyword_scores[i] - kw_min) / kw_range
         
+        # Apply active weights from the sweep experiment
+        hybrid_score = (semantic_weight * norm_sem) + (keyword_weight * norm_kw)
         scored_results.append((r, hybrid_score))
     
-    # Sort by hybrid score and return results
     scored_results.sort(key=lambda x: x[1], reverse=True)
     return [r for r, score in scored_results]
+
+"""
+# Helper: Filter results by relevance using Weighted Reciprocal Rank Fusion (RRF)
+def filter_results_by_relevance(results, query, medical_terms, semantic_weight=0.7, keyword_weight=0.3):
+    if not medical_terms or not results:
+        return results  
+    
+    # 1. Rank by Semantic Distance (Milvus distance: lower distance = better rank #1)
+    semantic_sorted = sorted(results, key=lambda r: r.distance)
+    sem_ranks = {id(r): rank + 1 for rank, r in enumerate(semantic_sorted)}
+    
+    # 2. Rank by Keyword Hits (Higher hits = better rank #1)
+    def compute_kw_hits(r):
+        entity = r.entity
+        abstract = getattr(entity, "abstract", "").lower()
+        title = getattr(entity, "title", "").lower()
+        return sum(2 for t in medical_terms if t in abstract) + sum(1 for t in medical_terms if t in title)
+    
+    keyword_sorted = sorted(results, key=compute_kw_hits, reverse=True)
+    kw_ranks = {id(r): rank + 1 for rank, r in enumerate(keyword_sorted)}
+    
+    # 3. Compute Weighted RRF score
+    k_rrf = 60
+    scored_results = []
+    
+    for r in results:
+        r_id = id(r)
+        r_sem_rank = sem_ranks.get(r_id, len(results))
+        r_kw_rank = kw_ranks.get(r_id, len(results))
+        
+        # Weighted RRF combination formula
+        rrf_score = (semantic_weight * (1.0 / (k_rrf + r_sem_rank))) + \
+                    (keyword_weight * (1.0 / (k_rrf + r_kw_rank)))
+                    
+        scored_results.append((r, rrf_score))
+    
+    # Sort by RRF score descending
+    scored_results.sort(key=lambda x: x[1], reverse=True)
+    return [r for r, score in scored_results]
+"""
 
 # Helper: Reorder sources by citation frequency in the answer
 def reorder_sources_by_usage(answer, sources, final_results, source_metadata):

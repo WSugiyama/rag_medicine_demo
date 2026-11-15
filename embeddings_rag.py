@@ -63,7 +63,7 @@ texts = [doc["abstract"] for doc in docs]
 titles = [doc["title"] for doc in docs]
 langs = [doc["lang"] for doc in docs]
 pmids = [doc["pmid"] for doc in docs]
-dois = [doc.get("doi", "") for doc in docs]  
+dois = [str(doc.get("doi") or "") for doc in docs]
 
 for i in range(0, len(texts), BATCH_SIZE):
     MAX_LEN = 2000
