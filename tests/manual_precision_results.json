@@ -1,0 +1,386 @@
+[
+  {
+    "query": "How effective is acupuncture for chronic pain management?",
+    "lang": "en",
+    "precision_at_5": 1.0,
+    "judgments": [
+      {
+        "pmid": "41778820",
+        "rank": 1,
+        "relevant": 1
+      },
+      {
+        "pmid": "42706514",
+        "rank": 2,
+        "relevant": 1
+      },
+      {
+        "pmid": "40917918",
+        "rank": 3,
+        "relevant": 1
+      },
+      {
+        "pmid": "42379691",
+        "rank": 4,
+        "relevant": 1
+      },
+      {
+        "pmid": "41632890",
+        "rank": 5,
+        "relevant": 1
+      }
+    ]
+  },
+  {
+    "query": "What are the benefits of probiotics for digestive health?",
+    "lang": "en",
+    "precision_at_5": 0.6,
+    "judgments": [
+      {
+        "pmid": "42865889",
+        "rank": 1,
+        "relevant": 1
+      },
+      {
+        "pmid": "42879046",
+        "rank": 2,
+        "relevant": 0
+      },
+      {
+        "pmid": "41895994",
+        "rank": 3,
+        "relevant": 1
+      },
+      {
+        "pmid": "42235708",
+        "rank": 4,
+        "relevant": 0
+      },
+      {
+        "pmid": "43023081",
+        "rank": 5,
+        "relevant": 1
+      }
+    ]
+  },
+  {
+    "query": "How do anti-inflammatory herbs help with arthritis?",
+    "lang": "en",
+    "precision_at_5": 1.0,
+    "judgments": [
+      {
+        "pmid": "40154100",
+        "rank": 1,
+        "relevant": 1
+      },
+      {
+        "pmid": "33624882",
+        "rank": 2,
+        "relevant": 1
+      },
+      {
+        "pmid": "37375716",
+        "rank": 3,
+        "relevant": 1
+      },
+      {
+        "pmid": "41045343",
+        "rank": 4,
+        "relevant": 1
+      },
+      {
+        "pmid": "38676473",
+        "rank": 5,
+        "relevant": 1
+      }
+    ]
+  },
+  {
+    "query": "What natural treatments are effective for anxiety?",
+    "lang": "en",
+    "precision_at_5": 0.2,
+    "judgments": [
+      {
+        "pmid": "42973251",
+        "rank": 1,
+        "relevant": 0
+      },
+      {
+        "pmid": "39799663",
+        "rank": 2,
+        "relevant": 0
+      },
+      {
+        "pmid": "42953409",
+        "rank": 3,
+        "relevant": 1
+      },
+      {
+        "pmid": "42699264",
+        "rank": 4,
+        "relevant": 0
+      },
+      {
+        "pmid": "42898778",
+        "rank": 5,
+        "relevant": 0
+      }
+    ]
+  },
+  {
+    "query": "How does meditation affect immune system function?",
+    "lang": "en",
+    "precision_at_5": 0.4,
+    "judgments": [
+      {
+        "pmid": "41987765",
+        "rank": 1,
+        "relevant": 0
+      },
+      {
+        "pmid": "40129498",
+        "rank": 2,
+        "relevant": 0
+      },
+      {
+        "pmid": "41180129",
+        "rank": 3,
+        "relevant": 1
+      },
+      {
+        "pmid": "39680432",
+        "rank": 4,
+        "relevant": 1
+      },
+      {
+        "pmid": "41969722",
+        "rank": 5,
+        "relevant": 0
+      }
+    ]
+  },
+  {
+    "query": "Can yoga help with depression symptoms?",
+    "lang": "en",
+    "precision_at_5": 0.4,
+    "judgments": [
+      {
+        "pmid": "40373021",
+        "rank": 1,
+        "relevant": 0
+      },
+      {
+        "pmid": "41108584",
+        "rank": 2,
+        "relevant": 0
+      },
+      {
+        "pmid": "40129498",
+        "rank": 3,
+        "relevant": 0
+      },
+      {
+        "pmid": "41327816",
+        "rank": 4,
+        "relevant": 1
+      },
+      {
+        "pmid": "40365370",
+        "rank": 5,
+        "relevant": 1
+      }
+    ]
+  },
+  {
+    "query": "What dietary supplements support heart health?",
+    "lang": "en",
+    "precision_at_5": 0.6,
+    "judgments": [
+      {
+        "pmid": "40569483",
+        "rank": 1,
+        "relevant": 1
+      },
+      {
+        "pmid": "40731220",
+        "rank": 2,
+        "relevant": 1
+      },
+      {
+        "pmid": "42675452",
+        "rank": 3,
+        "relevant": 1
+      },
+      {
+        "pmid": "40362500",
+        "rank": 4,
+        "relevant": 0
+      },
+      {
+        "pmid": "41120676",
+        "rank": 5,
+        "relevant": 0
+      }
+    ]
+  },
+  {
+    "query": "How effective is turmeric for inflammation?",
+    "lang": "en",
+    "precision_at_5": 0.2,
+    "judgments": [
+      {
+        "pmid": "42918315",
+        "rank": 1,
+        "relevant": 0
+      },
+      {
+        "pmid": "38676473",
+        "rank": 2,
+        "relevant": 0
+      },
+      {
+        "pmid": "27846826",
+        "rank": 3,
+        "relevant": 0
+      },
+      {
+        "pmid": "40154100",
+        "rank": 4,
+        "relevant": 0
+      },
+      {
+        "pmid": "32180294",
+        "rank": 5,
+        "relevant": 1
+      }
+    ]
+  },
+  {
+    "query": "What are the health benefits of omega-3 fatty acids?",
+    "lang": "en",
+    "precision_at_5": 1.0,
+    "judgments": [
+      {
+        "pmid": "39770939",
+        "rank": 1,
+        "relevant": 1
+      },
+      {
+        "pmid": "42377354",
+        "rank": 2,
+        "relevant": 1
+      },
+      {
+        "pmid": "42522977",
+        "rank": 3,
+        "relevant": 1
+      },
+      {
+        "pmid": "38869144",
+        "rank": 4,
+        "relevant": 1
+      },
+      {
+        "pmid": "41603552",
+        "rank": 5,
+        "relevant": 1
+      }
+    ]
+  },
+  {
+    "query": "Are green tea extracts safe for long-term liver health?",
+    "lang": "en",
+    "precision_at_5": 0.0,
+    "judgments": [
+      {
+        "pmid": "43034630",
+        "rank": 1,
+        "relevant": 0
+      },
+      {
+        "pmid": "42898675",
+        "rank": 2,
+        "relevant": 0
+      },
+      {
+        "pmid": "42876247",
+        "rank": 3,
+        "relevant": 0
+      },
+      {
+        "pmid": "42933476",
+        "rank": 4,
+        "relevant": 0
+      },
+      {
+        "pmid": "42877278",
+        "rank": 5,
+        "relevant": 0
+      }
+    ]
+  },
+  {
+    "query": "Apa saja manfaat terapi relaksasi bagi penderita kecemasan kronis?",
+    "lang": "id",
+    "precision_at_5": 0.0,
+    "judgments": [
+      {
+        "pmid": "41953559",
+        "rank": 1,
+        "relevant": 0
+      },
+      {
+        "pmid": "42032958",
+        "rank": 2,
+        "relevant": 0
+      },
+      {
+        "pmid": "42868872",
+        "rank": 3,
+        "relevant": 0
+      },
+      {
+        "pmid": "42404251",
+        "rank": 4,
+        "relevant": 0
+      },
+      {
+        "pmid": "42907873",
+        "rank": 5,
+        "relevant": 0
+      }
+    ]
+  },
+  {
+    "query": "Bagaimana efektivitas pengobatan herbal terhadap nyeri sendi?",
+    "lang": "id",
+    "precision_at_5": 0.2,
+    "judgments": [
+      {
+        "pmid": "38676473",
+        "rank": 1,
+        "relevant": 1
+      },
+      {
+        "pmid": "39608171",
+        "rank": 2,
+        "relevant": 0
+      },
+      {
+        "pmid": "42907873",
+        "rank": 3,
+        "relevant": 0
+      },
+      {
+        "pmid": "42879419",
+        "rank": 4,
+        "relevant": 0
+      },
+      {
+        "pmid": "40154100",
+        "rank": 5,
+        "relevant": 0
+      }
+    ]
+  }
+]

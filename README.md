@@ -100,7 +100,7 @@ You can execute the full test suite or target specific modules using command-lin
 time python3 tests/test_runner.py --suite all
 
 # Run specific functional suites
-python3 tests/test_runner.py --suite indonesian    # Test multilingual extraction
+python3 tests/test_runner.py --suite indonesian	# Test multilingual extraction
 python3 tests/test_runner.py --suite citations     # Test citation remapping & patterns
 python3 tests/test_runner.py --suite term_extraction          # Test term extraction coverage
 ```
@@ -110,10 +110,10 @@ Test results are automatically serialized into timestamped artifacts (e.g., ```t
 
 #### Evaluation of Trade-offs & Empirical Findings
 
-An ablation study across $n=8$ stratified queries ($repeats=5$) surfaced key architectural insights and limitations:
+An ablation study across $n=8$ stratified queries ($5$ total execution repetitions per weight setting, with $1$ warmup trial discarded and $4$ measured trials recorded) surfaced key architectural insights and limitations:
 
 1. **Cross-Lingual Retrieval Disparity:** English queries consistently achieved high precision (Precision@3 $\approx 1.0$), whereas Indonesian queries underperformed severely ($0.67$ and $0.0$). This highlights a cross-lingual semantic alignment bottleneck when using general embedding models (`nomic-embed-text`) on English-skewed biomedical corpora.
-2. **Rank Invariance ($W_{sem} \in [0.3, 0.7]$):** Precision@3 and the resulting top-$3$ context sets remained entirely identical across this range. This indicates that the keyword component is currently inert in altering rank order over standard blending weights due to vector score magnitude dominance.
+2. **Rank Invariance ($W_{sem} \in [0.3, 0.7]$):** Precision@3 and the resulting top-3 context sets remained entirely identical across this range. This indicates that the keyword component is currently inert in altering rank order over standard blending weights due to vector score magnitude dominance.
 3. **Extreme Boundary Drop ($W_{sem} = 0.95$):** A precision drop was observed at the extreme upper bound, though this behavior is currently isolated to a single query instance ($n=1$) and requires broader validation before drawing general conclusions.
 
 See [`benchmarks/weight_sweep_results.json`](benchmarks/weight_sweep_results.json) for full granular execution traces.
@@ -121,14 +121,14 @@ See [`benchmarks/weight_sweep_results.json`](benchmarks/weight_sweep_results.jso
 #### 📊 Hybrid Weight Sweep Precision@3 ($n=8$ Queries)
 | Semantic Weight ($W_{sem}$) | Keyword Weight ($W_{kw}$) | Mean Precision@3 | Observation |
 | :---: | :---: | :---: | :--- |
-| **0.30** | 0.70 | ~0.79 | Heavy keyword weight; identical top-3 ranking output. |
-| **0.50** | 0.50 | ~0.79 | Balanced hybrid weighting (rank-invariant to $0.3$). |
-| **0.70** | 0.30 | ~0.79 | Standard experimental configuration. |
+| **0.30** | 0.70 | ~0.875 | Heavy keyword weight; identical top-3 ranking output. |
+| **0.50** | 0.50 | ~0.875 | Balanced hybrid weighting (rank-invariant to $0.3$). |
+| **0.70** | 0.30 | ~0.875 | Standard experimental configuration. |
 | **0.85** | 0.15 | ~0.79 | Near-pure vector search plateau. |
-| **0.95** | 0.05 | ~0.71 | Single-query drop driven by loss of lexical constraint ($n=1$). |
+| **0.95** | 0.05 | ~0.79 | Single-query drop driven by loss of lexical constraint ($n=1$). |
 
 
-#### 📊 Split Latency & Top-$K$ Ablation Results (Local Prototype, Split Timing)
+#### 📊 Split Latency & Top-K Ablation Results (Local Prototype, Split Timing)
 | Top-$K$ | End-to-End Retrieval Median | Generation Median (Local LLM) | Avg Tokens | Observed Trend / Hypothesis |
 | :---: | :---: | :---: | :---: | :--- |
 | **$K = 3$** | **0.0281s** (~28 ms) | **1.237s** | 28.7 | **Hypothesis:** Compact context window yields high precision with minimal token generation. |
@@ -136,6 +136,35 @@ See [`benchmarks/weight_sweep_results.json`](benchmarks/weight_sweep_results.jso
 | **$K = 10$** | **0.0329s** (~33 ms) | **6.831s** | 202.7 | **Hypothesis:** Broader recall increases context size, amplifying generation latency and token output. |
 
 **Note**: Local inference latencies exhibit run-to-run variance depending on hardware cache state and token generation length.
+
+#### 📊 Hand-Judged Precision@5 Baseline ($n=12$ Queries, 60 Judgments)
+To establish a reliable human-judged baseline beyond automated weak labels, top-5 retrieved documents were manually evaluated across **12 queries** (**10 English**, **2 Indonesian**; **27/60 relevant**, overall **Mean Precision@5 = 0.45**; English mean = **0.54**, Indonesian mean = **0.10**).
+
+| # | Query | Lang | Relevant / 5 | Precision@5 |
+| :---: | :--- | :---: | :---: | :---: |
+| 1 | How effective is acupuncture for chronic pain management? | `en` | 5/5 | **1.00** |
+| 2 | What are the benefits of probiotics for digestive health? | `en` | 3/5 | **0.60** |
+| 3 | How do anti-inflammatory herbs help with arthritis? | `en` | 5/5 | **1.00** |
+| 4 | What natural treatments are effective for anxiety? | `en` | 1/5 | **0.20** |
+| 5 | How does meditation affect immune system function? | `en` | 2/5 | **0.40** |
+| 6 | Can yoga help with depression symptoms? | `en` | 2/5 | **0.40** |
+| 7 | What dietary supplements support heart health? | `en` | 3/5 | **0.60** |
+| 8 | How effective is turmeric for inflammation? | `en` | 1/5 | **0.20** |
+| 9 | What are the health benefits of omega-3 fatty acids? | `en` | 5/5 | **1.00** |
+| 10 | Are green tea extracts safe for long-term liver health? | `en` | 0/5 | **0.00** |
+| 11 | Apa saja manfaat terapi relaksasi bagi penderita kecemasan kronis? | `id` | 0/5 | **0.00** |
+| 12 | Bagaimana efektivitas pengobatan herbal terhadap nyeri sendi? | `id` | 1/5 | **0.20** |
+
+See [`tests/manual_precision_results.json`](tests/manual_precision_results.json) for full per-rank relevance judgments.
+
+**Key Takeaways from the Precision@5 Audit:**
+- **Strong English clinical/supplement baselines:** Broad, well-represented topics such as acupuncture for chronic pain (`1.00`), anti-inflammatory herbs for arthritis (`1.00`), and omega-3 fatty acids (`1.00`) consistently surfaced relevant top-5 results.
+- **Indonesian cross-lingual drift:** Non-English queries averaged **0.10** Precision@5, frequently pulling off-target conditions, non-clinical surveys, or tangentially related interventions.
+- **Specific extract & condition mismatches:** Queries targeting specific substances or safety profiles (such as green tea extracts for liver health, `0.00`, or turmeric for inflammation, `0.20`) often returned broader multi-herb formulas, general reviews, or mechanistic/animal studies instead.
+
+#### ⚠️ Evaluation Harness Limitations & Next Steps
+- **Weak Label Bottleneck:** Initial Recall@K / MRR harness runs (scoring Recall@5 ~0.07 and MRR ~0.11) were heavily penalized by strict keyword-derived ground-truth labels rather than actual retrieval failure.
+- **Baseline Established, Next Focus:** With the 12-query hand-judged Precision@5 baseline recorded (**0.45** overall), priority improvements are cross-lingual query normalization/expansion for Indonesian queries, entity/compound matching for specific extracts, and reranking/filtering out non-clinical or preclinical noise.
 
 
 ### 🚀 Technical Improvements & Roadmap
