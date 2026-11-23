@@ -5,7 +5,7 @@
 
 *.json
 benchmarks/benchmark_results_split.json
-!benchmarks/weight_sweep_results.json
+benchmarks/weight_sweep_results.json
 pubmed_integrative.json
 tests/test_results_*.json
 !tests/manual_precision_results.json

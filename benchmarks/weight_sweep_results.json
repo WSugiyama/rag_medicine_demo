@@ -1,5 +1,7 @@
 {
-  "timestamp": "2026-11-15T18:49:07.295222+00:00",
+  "timestamp": "2026-11-23T16:13:36.861513+00:00",
+  "scoring": "normalized",
+  "git_commit": "658d66b22cf252031a707110e96e551334a10150",
   "queries_tested": [
     "What are the benefits of probiotics for digestive health?",
     "How do anti-inflammatory herbs help with arthritis?",
@@ -17,10 +19,15 @@
         "semantic_weight": 0.3,
         "keyword_weight": 0.7,
         "precision_at_3": 1.0,
+        "top_3_doc_ids": [
+          "42869736",
+          "42898607",
+          "42865889"
+        ],
         "metrics": {
-          "median_latency_seconds": 0.003,
+          "median_latency_seconds": 0.004,
           "iqr_latency_seconds": 0.001,
-          "avg_tokens_generated": 1014.0,
+          "estimated_context_tokens_generated": 1014.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -29,10 +36,15 @@
         "semantic_weight": 0.5,
         "keyword_weight": 0.5,
         "precision_at_3": 1.0,
+        "top_3_doc_ids": [
+          "42869736",
+          "42898607",
+          "42865889"
+        ],
         "metrics": {
-          "median_latency_seconds": 0.004,
-          "iqr_latency_seconds": 0.002,
-          "avg_tokens_generated": 1014.0,
+          "median_latency_seconds": 0.002,
+          "iqr_latency_seconds": 0.0,
+          "estimated_context_tokens_generated": 1014.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -41,10 +53,15 @@
         "semantic_weight": 0.7,
         "keyword_weight": 0.3,
         "precision_at_3": 1.0,
+        "top_3_doc_ids": [
+          "42869736",
+          "42898607",
+          "42865889"
+        ],
         "metrics": {
           "median_latency_seconds": 0.002,
-          "iqr_latency_seconds": 0.0,
-          "avg_tokens_generated": 1014.0,
+          "iqr_latency_seconds": 0.001,
+          "estimated_context_tokens_generated": 1014.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -53,10 +70,15 @@
         "semantic_weight": 0.85,
         "keyword_weight": 0.15,
         "precision_at_3": 0.3333333333333333,
+        "top_3_doc_ids": [
+          "42869736",
+          "43028230",
+          "40362500"
+        ],
         "metrics": {
-          "median_latency_seconds": 0.002,
-          "iqr_latency_seconds": 0.001,
-          "avg_tokens_generated": 905.0,
+          "median_latency_seconds": 0.001,
+          "iqr_latency_seconds": 0.0,
+          "estimated_context_tokens_generated": 905.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -65,10 +87,15 @@
         "semantic_weight": 0.95,
         "keyword_weight": 0.05,
         "precision_at_3": 0.3333333333333333,
+        "top_3_doc_ids": [
+          "43028230",
+          "40362500",
+          "42869736"
+        ],
         "metrics": {
           "median_latency_seconds": 0.002,
-          "iqr_latency_seconds": 0.0,
-          "avg_tokens_generated": 905.0,
+          "iqr_latency_seconds": 0.001,
+          "estimated_context_tokens_generated": 905.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -79,10 +106,15 @@
         "semantic_weight": 0.3,
         "keyword_weight": 0.7,
         "precision_at_3": 1.0,
+        "top_3_doc_ids": [
+          "27846826",
+          "41583480",
+          "40154100"
+        ],
         "metrics": {
-          "median_latency_seconds": 0.005,
-          "iqr_latency_seconds": 0.005,
-          "avg_tokens_generated": 1828.0,
+          "median_latency_seconds": 0.001,
+          "iqr_latency_seconds": 0.0,
+          "estimated_context_tokens_generated": 1828.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -91,10 +123,15 @@
         "semantic_weight": 0.5,
         "keyword_weight": 0.5,
         "precision_at_3": 1.0,
+        "top_3_doc_ids": [
+          "27846826",
+          "41583480",
+          "42201139"
+        ],
         "metrics": {
           "median_latency_seconds": 0.002,
-          "iqr_latency_seconds": 0.0,
-          "avg_tokens_generated": 1811.0,
+          "iqr_latency_seconds": 0.001,
+          "estimated_context_tokens_generated": 1811.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -103,10 +140,15 @@
         "semantic_weight": 0.7,
         "keyword_weight": 0.3,
         "precision_at_3": 1.0,
+        "top_3_doc_ids": [
+          "42741723",
+          "41583480",
+          "27846826"
+        ],
         "metrics": {
-          "median_latency_seconds": 0.002,
+          "median_latency_seconds": 0.001,
           "iqr_latency_seconds": 0.0,
-          "avg_tokens_generated": 1854.0,
+          "estimated_context_tokens_generated": 1854.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -115,10 +157,15 @@
         "semantic_weight": 0.85,
         "keyword_weight": 0.15,
         "precision_at_3": 1.0,
+        "top_3_doc_ids": [
+          "42741723",
+          "42858055",
+          "42201139"
+        ],
         "metrics": {
           "median_latency_seconds": 0.002,
           "iqr_latency_seconds": 0.0,
-          "avg_tokens_generated": 1578.0,
+          "estimated_context_tokens_generated": 1578.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -127,10 +174,15 @@
         "semantic_weight": 0.95,
         "keyword_weight": 0.05,
         "precision_at_3": 1.0,
+        "top_3_doc_ids": [
+          "42741723",
+          "42858055",
+          "42201139"
+        ],
         "metrics": {
-          "median_latency_seconds": 0.002,
+          "median_latency_seconds": 0.001,
           "iqr_latency_seconds": 0.0,
-          "avg_tokens_generated": 1578.0,
+          "estimated_context_tokens_generated": 1578.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -141,10 +193,15 @@
         "semantic_weight": 0.3,
         "keyword_weight": 0.7,
         "precision_at_3": 1.0,
+        "top_3_doc_ids": [
+          "42563479",
+          "42137833",
+          "42694510"
+        ],
         "metrics": {
-          "median_latency_seconds": 0.003,
+          "median_latency_seconds": 0.002,
           "iqr_latency_seconds": 0.0,
-          "avg_tokens_generated": 1942.0,
+          "estimated_context_tokens_generated": 1942.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -153,10 +210,15 @@
         "semantic_weight": 0.5,
         "keyword_weight": 0.5,
         "precision_at_3": 1.0,
+        "top_3_doc_ids": [
+          "42563479",
+          "42137833",
+          "42694510"
+        ],
         "metrics": {
-          "median_latency_seconds": 0.003,
+          "median_latency_seconds": 0.002,
           "iqr_latency_seconds": 0.0,
-          "avg_tokens_generated": 1942.0,
+          "estimated_context_tokens_generated": 1942.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -165,10 +227,15 @@
         "semantic_weight": 0.7,
         "keyword_weight": 0.3,
         "precision_at_3": 1.0,
+        "top_3_doc_ids": [
+          "42563479",
+          "42137833",
+          "42694510"
+        ],
         "metrics": {
           "median_latency_seconds": 0.002,
-          "iqr_latency_seconds": 0.001,
-          "avg_tokens_generated": 1942.0,
+          "iqr_latency_seconds": 0.0,
+          "estimated_context_tokens_generated": 1942.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -177,10 +244,15 @@
         "semantic_weight": 0.85,
         "keyword_weight": 0.15,
         "precision_at_3": 1.0,
+        "top_3_doc_ids": [
+          "42563479",
+          "42137833",
+          "42694510"
+        ],
         "metrics": {
-          "median_latency_seconds": 0.003,
-          "iqr_latency_seconds": 0.001,
-          "avg_tokens_generated": 1942.0,
+          "median_latency_seconds": 0.002,
+          "iqr_latency_seconds": 0.0,
+          "estimated_context_tokens_generated": 1942.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -189,10 +261,15 @@
         "semantic_weight": 0.95,
         "keyword_weight": 0.05,
         "precision_at_3": 1.0,
+        "top_3_doc_ids": [
+          "42563479",
+          "42137833",
+          "42694510"
+        ],
         "metrics": {
           "median_latency_seconds": 0.002,
           "iqr_latency_seconds": 0.0,
-          "avg_tokens_generated": 1942.0,
+          "estimated_context_tokens_generated": 1942.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -203,10 +280,15 @@
         "semantic_weight": 0.3,
         "keyword_weight": 0.7,
         "precision_at_3": 1.0,
+        "top_3_doc_ids": [
+          "40051582",
+          "39681243",
+          "40373021"
+        ],
         "metrics": {
           "median_latency_seconds": 0.002,
-          "iqr_latency_seconds": 0.001,
-          "avg_tokens_generated": 1260.0,
+          "iqr_latency_seconds": 0.0,
+          "estimated_context_tokens_generated": 1260.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -215,10 +297,15 @@
         "semantic_weight": 0.5,
         "keyword_weight": 0.5,
         "precision_at_3": 1.0,
+        "top_3_doc_ids": [
+          "40051582",
+          "39681243",
+          "40373021"
+        ],
         "metrics": {
-          "median_latency_seconds": 0.001,
+          "median_latency_seconds": 0.002,
           "iqr_latency_seconds": 0.0,
-          "avg_tokens_generated": 1260.0,
+          "estimated_context_tokens_generated": 1260.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -227,10 +314,15 @@
         "semantic_weight": 0.7,
         "keyword_weight": 0.3,
         "precision_at_3": 1.0,
+        "top_3_doc_ids": [
+          "40051582",
+          "39681243",
+          "40373021"
+        ],
         "metrics": {
           "median_latency_seconds": 0.002,
           "iqr_latency_seconds": 0.0,
-          "avg_tokens_generated": 1260.0,
+          "estimated_context_tokens_generated": 1260.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -239,10 +331,15 @@
         "semantic_weight": 0.85,
         "keyword_weight": 0.15,
         "precision_at_3": 1.0,
+        "top_3_doc_ids": [
+          "40051582",
+          "39681243",
+          "40373021"
+        ],
         "metrics": {
-          "median_latency_seconds": 0.002,
-          "iqr_latency_seconds": 0.0,
-          "avg_tokens_generated": 1260.0,
+          "median_latency_seconds": 0.003,
+          "iqr_latency_seconds": 0.001,
+          "estimated_context_tokens_generated": 1260.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -251,10 +348,15 @@
         "semantic_weight": 0.95,
         "keyword_weight": 0.05,
         "precision_at_3": 1.0,
+        "top_3_doc_ids": [
+          "39681243",
+          "42694510",
+          "40373021"
+        ],
         "metrics": {
-          "median_latency_seconds": 0.002,
-          "iqr_latency_seconds": 0.0,
-          "avg_tokens_generated": 1661.0,
+          "median_latency_seconds": 0.003,
+          "iqr_latency_seconds": 0.001,
+          "estimated_context_tokens_generated": 1661.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -265,10 +367,15 @@
         "semantic_weight": 0.3,
         "keyword_weight": 0.7,
         "precision_at_3": 1.0,
+        "top_3_doc_ids": [
+          "42949132",
+          "42920975",
+          "42998216"
+        ],
         "metrics": {
-          "median_latency_seconds": 0.002,
+          "median_latency_seconds": 0.003,
           "iqr_latency_seconds": 0.0,
-          "avg_tokens_generated": 1538.0,
+          "estimated_context_tokens_generated": 1538.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -277,10 +384,15 @@
         "semantic_weight": 0.5,
         "keyword_weight": 0.5,
         "precision_at_3": 1.0,
+        "top_3_doc_ids": [
+          "42949132",
+          "42920975",
+          "42998216"
+        ],
         "metrics": {
           "median_latency_seconds": 0.002,
           "iqr_latency_seconds": 0.0,
-          "avg_tokens_generated": 1538.0,
+          "estimated_context_tokens_generated": 1538.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -289,10 +401,15 @@
         "semantic_weight": 0.7,
         "keyword_weight": 0.3,
         "precision_at_3": 1.0,
+        "top_3_doc_ids": [
+          "42949132",
+          "42920975",
+          "42998216"
+        ],
         "metrics": {
           "median_latency_seconds": 0.002,
           "iqr_latency_seconds": 0.0,
-          "avg_tokens_generated": 1538.0,
+          "estimated_context_tokens_generated": 1538.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -301,10 +418,15 @@
         "semantic_weight": 0.85,
         "keyword_weight": 0.15,
         "precision_at_3": 1.0,
+        "top_3_doc_ids": [
+          "42949132",
+          "42920975",
+          "42998216"
+        ],
         "metrics": {
           "median_latency_seconds": 0.002,
           "iqr_latency_seconds": 0.0,
-          "avg_tokens_generated": 1538.0,
+          "estimated_context_tokens_generated": 1538.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -313,10 +435,15 @@
         "semantic_weight": 0.95,
         "keyword_weight": 0.05,
         "precision_at_3": 1.0,
+        "top_3_doc_ids": [
+          "42949132",
+          "42920975",
+          "42924621"
+        ],
         "metrics": {
           "median_latency_seconds": 0.002,
           "iqr_latency_seconds": 0.0,
-          "avg_tokens_generated": 1616.0,
+          "estimated_context_tokens_generated": 1616.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -327,10 +454,15 @@
         "semantic_weight": 0.3,
         "keyword_weight": 0.7,
         "precision_at_3": 0.0,
+        "top_3_doc_ids": [
+          "40365370",
+          "41953559",
+          "42881517"
+        ],
         "metrics": {
           "median_latency_seconds": 0.003,
           "iqr_latency_seconds": 0.0,
-          "avg_tokens_generated": 1370.0,
+          "estimated_context_tokens_generated": 1370.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -339,10 +471,15 @@
         "semantic_weight": 0.5,
         "keyword_weight": 0.5,
         "precision_at_3": 0.0,
+        "top_3_doc_ids": [
+          "40365370",
+          "41953559",
+          "42881517"
+        ],
         "metrics": {
           "median_latency_seconds": 0.003,
           "iqr_latency_seconds": 0.0,
-          "avg_tokens_generated": 1370.0,
+          "estimated_context_tokens_generated": 1370.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -351,10 +488,15 @@
         "semantic_weight": 0.7,
         "keyword_weight": 0.3,
         "precision_at_3": 0.0,
+        "top_3_doc_ids": [
+          "40365370",
+          "41953559",
+          "42881517"
+        ],
         "metrics": {
-          "median_latency_seconds": 0.002,
-          "iqr_latency_seconds": 0.0,
-          "avg_tokens_generated": 1370.0,
+          "median_latency_seconds": 0.003,
+          "iqr_latency_seconds": 0.001,
+          "estimated_context_tokens_generated": 1370.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -363,10 +505,15 @@
         "semantic_weight": 0.85,
         "keyword_weight": 0.15,
         "precision_at_3": 0.0,
+        "top_3_doc_ids": [
+          "40365370",
+          "41953559",
+          "42881517"
+        ],
         "metrics": {
-          "median_latency_seconds": 0.002,
+          "median_latency_seconds": 0.004,
           "iqr_latency_seconds": 0.001,
-          "avg_tokens_generated": 1370.0,
+          "estimated_context_tokens_generated": 1370.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -375,10 +522,15 @@
         "semantic_weight": 0.95,
         "keyword_weight": 0.05,
         "precision_at_3": 0.0,
+        "top_3_doc_ids": [
+          "40365370",
+          "41953559",
+          "42881517"
+        ],
         "metrics": {
           "median_latency_seconds": 0.002,
           "iqr_latency_seconds": 0.0,
-          "avg_tokens_generated": 1370.0,
+          "estimated_context_tokens_generated": 1370.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -389,10 +541,15 @@
         "semantic_weight": 0.3,
         "keyword_weight": 0.7,
         "precision_at_3": 1.0,
+        "top_3_doc_ids": [
+          "42327741",
+          "41814505",
+          "42865889"
+        ],
         "metrics": {
-          "median_latency_seconds": 0.003,
-          "iqr_latency_seconds": 0.002,
-          "avg_tokens_generated": 1170.0,
+          "median_latency_seconds": 0.002,
+          "iqr_latency_seconds": 0.0,
+          "estimated_context_tokens_generated": 1170.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -401,10 +558,15 @@
         "semantic_weight": 0.5,
         "keyword_weight": 0.5,
         "precision_at_3": 1.0,
+        "top_3_doc_ids": [
+          "42327741",
+          "41814505",
+          "42865889"
+        ],
         "metrics": {
-          "median_latency_seconds": 0.003,
-          "iqr_latency_seconds": 0.004,
-          "avg_tokens_generated": 1170.0,
+          "median_latency_seconds": 0.001,
+          "iqr_latency_seconds": 0.0,
+          "estimated_context_tokens_generated": 1170.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -413,10 +575,15 @@
         "semantic_weight": 0.7,
         "keyword_weight": 0.3,
         "precision_at_3": 1.0,
+        "top_3_doc_ids": [
+          "42327741",
+          "41814505",
+          "42985158"
+        ],
         "metrics": {
-          "median_latency_seconds": 0.001,
+          "median_latency_seconds": 0.002,
           "iqr_latency_seconds": 0.0,
-          "avg_tokens_generated": 1500.0,
+          "estimated_context_tokens_generated": 1500.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -425,10 +592,15 @@
         "semantic_weight": 0.85,
         "keyword_weight": 0.15,
         "precision_at_3": 1.0,
+        "top_3_doc_ids": [
+          "42985158",
+          "42327741",
+          "42938706"
+        ],
         "metrics": {
           "median_latency_seconds": 0.002,
-          "iqr_latency_seconds": 0.001,
-          "avg_tokens_generated": 1706.0,
+          "iqr_latency_seconds": 0.0,
+          "estimated_context_tokens_generated": 1706.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -437,10 +609,15 @@
         "semantic_weight": 0.95,
         "keyword_weight": 0.05,
         "precision_at_3": 1.0,
+        "top_3_doc_ids": [
+          "42985158",
+          "42938706",
+          "42327741"
+        ],
         "metrics": {
           "median_latency_seconds": 0.002,
-          "iqr_latency_seconds": 0.0,
-          "avg_tokens_generated": 1706.0,
+          "iqr_latency_seconds": 0.001,
+          "estimated_context_tokens_generated": 1706.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -451,10 +628,15 @@
         "semantic_weight": 0.3,
         "keyword_weight": 0.7,
         "precision_at_3": 1.0,
+        "top_3_doc_ids": [
+          "41862273",
+          "42974628",
+          "41662713"
+        ],
         "metrics": {
           "median_latency_seconds": 0.003,
           "iqr_latency_seconds": 0.0,
-          "avg_tokens_generated": 1090.0,
+          "estimated_context_tokens_generated": 1090.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -463,10 +645,15 @@
         "semantic_weight": 0.5,
         "keyword_weight": 0.5,
         "precision_at_3": 1.0,
+        "top_3_doc_ids": [
+          "41862273",
+          "42974628",
+          "41662713"
+        ],
         "metrics": {
-          "median_latency_seconds": 0.002,
-          "iqr_latency_seconds": 0.001,
-          "avg_tokens_generated": 1090.0,
+          "median_latency_seconds": 0.003,
+          "iqr_latency_seconds": 0.0,
+          "estimated_context_tokens_generated": 1090.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -475,10 +662,15 @@
         "semantic_weight": 0.7,
         "keyword_weight": 0.3,
         "precision_at_3": 1.0,
+        "top_3_doc_ids": [
+          "41862273",
+          "42974628",
+          "41662713"
+        ],
         "metrics": {
-          "median_latency_seconds": 0.003,
-          "iqr_latency_seconds": 0.001,
-          "avg_tokens_generated": 1090.0,
+          "median_latency_seconds": 0.002,
+          "iqr_latency_seconds": 0.0,
+          "estimated_context_tokens_generated": 1090.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -487,10 +679,15 @@
         "semantic_weight": 0.85,
         "keyword_weight": 0.15,
         "precision_at_3": 1.0,
+        "top_3_doc_ids": [
+          "41862273",
+          "42974628",
+          "42902159"
+        ],
         "metrics": {
           "median_latency_seconds": 0.003,
-          "iqr_latency_seconds": 0.0,
-          "avg_tokens_generated": 1212.0,
+          "iqr_latency_seconds": 0.001,
+          "estimated_context_tokens_generated": 1212.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
@@ -499,13 +696,596 @@
         "semantic_weight": 0.95,
         "keyword_weight": 0.05,
         "precision_at_3": 1.0,
+        "top_3_doc_ids": [
+          "41862273",
+          "42902159",
+          "42974628"
+        ],
         "metrics": {
-          "median_latency_seconds": 0.003,
-          "iqr_latency_seconds": 0.001,
-          "avg_tokens_generated": 1212.0,
+          "median_latency_seconds": 0.002,
+          "iqr_latency_seconds": 0.0,
+          "estimated_context_tokens_generated": 1212.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
         }
+      }
+    ]
+  },
+  "rank_invariance": {
+    "What are the benefits of probiotics for digestive health?": [
+      {
+        "w_a": 0.3,
+        "w_b": 0.5,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.3,
+        "w_b": 0.7,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.3,
+        "w_b": 0.85,
+        "top_3_shared": 1,
+        "top_3_jaccard": 0.2,
+        "kendall_tau": 0.0
+      },
+      {
+        "w_a": 0.3,
+        "w_b": 0.95,
+        "top_3_shared": 1,
+        "top_3_jaccard": 0.2,
+        "kendall_tau": -0.5
+      },
+      {
+        "w_a": 0.5,
+        "w_b": 0.7,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.5,
+        "w_b": 0.85,
+        "top_3_shared": 1,
+        "top_3_jaccard": 0.2,
+        "kendall_tau": 0.0
+      },
+      {
+        "w_a": 0.5,
+        "w_b": 0.95,
+        "top_3_shared": 1,
+        "top_3_jaccard": 0.2,
+        "kendall_tau": -0.5
+      },
+      {
+        "w_a": 0.7,
+        "w_b": 0.85,
+        "top_3_shared": 1,
+        "top_3_jaccard": 0.2,
+        "kendall_tau": 0.0
+      },
+      {
+        "w_a": 0.7,
+        "w_b": 0.95,
+        "top_3_shared": 1,
+        "top_3_jaccard": 0.2,
+        "kendall_tau": -0.5
+      },
+      {
+        "w_a": 0.85,
+        "w_b": 0.95,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": -0.3333
+      }
+    ],
+    "How do anti-inflammatory herbs help with arthritis?": [
+      {
+        "w_a": 0.3,
+        "w_b": 0.5,
+        "top_3_shared": 2,
+        "top_3_jaccard": 0.5,
+        "kendall_tau": 0.6667
+      },
+      {
+        "w_a": 0.3,
+        "w_b": 0.7,
+        "top_3_shared": 2,
+        "top_3_jaccard": 0.5,
+        "kendall_tau": -0.3333
+      },
+      {
+        "w_a": 0.3,
+        "w_b": 0.85,
+        "top_3_shared": 0,
+        "top_3_jaccard": 0.0,
+        "kendall_tau": -1.0
+      },
+      {
+        "w_a": 0.3,
+        "w_b": 0.95,
+        "top_3_shared": 0,
+        "top_3_jaccard": 0.0,
+        "kendall_tau": -1.0
+      },
+      {
+        "w_a": 0.5,
+        "w_b": 0.7,
+        "top_3_shared": 2,
+        "top_3_jaccard": 0.5,
+        "kendall_tau": -0.3333
+      },
+      {
+        "w_a": 0.5,
+        "w_b": 0.85,
+        "top_3_shared": 1,
+        "top_3_jaccard": 0.2,
+        "kendall_tau": -1.0
+      },
+      {
+        "w_a": 0.5,
+        "w_b": 0.95,
+        "top_3_shared": 1,
+        "top_3_jaccard": 0.2,
+        "kendall_tau": -1.0
+      },
+      {
+        "w_a": 0.7,
+        "w_b": 0.85,
+        "top_3_shared": 1,
+        "top_3_jaccard": 0.2,
+        "kendall_tau": 0.0
+      },
+      {
+        "w_a": 0.7,
+        "w_b": 0.95,
+        "top_3_shared": 1,
+        "top_3_jaccard": 0.2,
+        "kendall_tau": 0.0
+      },
+      {
+        "w_a": 0.85,
+        "w_b": 0.95,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      }
+    ],
+    "What natural treatments are effective for anxiety?": [
+      {
+        "w_a": 0.3,
+        "w_b": 0.5,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.3,
+        "w_b": 0.7,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.3,
+        "w_b": 0.85,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.3,
+        "w_b": 0.95,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.5,
+        "w_b": 0.7,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.5,
+        "w_b": 0.85,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.5,
+        "w_b": 0.95,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.7,
+        "w_b": 0.85,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.7,
+        "w_b": 0.95,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.85,
+        "w_b": 0.95,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      }
+    ],
+    "How does meditation affect immune system function?": [
+      {
+        "w_a": 0.3,
+        "w_b": 0.5,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.3,
+        "w_b": 0.7,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.3,
+        "w_b": 0.85,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.3,
+        "w_b": 0.95,
+        "top_3_shared": 2,
+        "top_3_jaccard": 0.5,
+        "kendall_tau": -0.3333
+      },
+      {
+        "w_a": 0.5,
+        "w_b": 0.7,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.5,
+        "w_b": 0.85,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.5,
+        "w_b": 0.95,
+        "top_3_shared": 2,
+        "top_3_jaccard": 0.5,
+        "kendall_tau": -0.3333
+      },
+      {
+        "w_a": 0.7,
+        "w_b": 0.85,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.7,
+        "w_b": 0.95,
+        "top_3_shared": 2,
+        "top_3_jaccard": 0.5,
+        "kendall_tau": -0.3333
+      },
+      {
+        "w_a": 0.85,
+        "w_b": 0.95,
+        "top_3_shared": 2,
+        "top_3_jaccard": 0.5,
+        "kendall_tau": -0.3333
+      }
+    ],
+    "Apa saja gejala utama dari infeksi COVID-19?": [
+      {
+        "w_a": 0.3,
+        "w_b": 0.5,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.3,
+        "w_b": 0.7,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.3,
+        "w_b": 0.85,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.3,
+        "w_b": 0.95,
+        "top_3_shared": 2,
+        "top_3_jaccard": 0.5,
+        "kendall_tau": 0.6667
+      },
+      {
+        "w_a": 0.5,
+        "w_b": 0.7,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.5,
+        "w_b": 0.85,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.5,
+        "w_b": 0.95,
+        "top_3_shared": 2,
+        "top_3_jaccard": 0.5,
+        "kendall_tau": 0.6667
+      },
+      {
+        "w_a": 0.7,
+        "w_b": 0.85,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.7,
+        "w_b": 0.95,
+        "top_3_shared": 2,
+        "top_3_jaccard": 0.5,
+        "kendall_tau": 0.6667
+      },
+      {
+        "w_a": 0.85,
+        "w_b": 0.95,
+        "top_3_shared": 2,
+        "top_3_jaccard": 0.5,
+        "kendall_tau": 0.6667
+      }
+    ],
+    "Bagaimana efektivitas vaksin terhadap varian baru?": [
+      {
+        "w_a": 0.3,
+        "w_b": 0.5,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.3,
+        "w_b": 0.7,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.3,
+        "w_b": 0.85,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.3,
+        "w_b": 0.95,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.5,
+        "w_b": 0.7,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.5,
+        "w_b": 0.85,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.5,
+        "w_b": 0.95,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.7,
+        "w_b": 0.85,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.7,
+        "w_b": 0.95,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.85,
+        "w_b": 0.95,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      }
+    ],
+    "How do probiotics interact with COVID-19 vaccines and what are the implications for immune response?": [
+      {
+        "w_a": 0.3,
+        "w_b": 0.5,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.3,
+        "w_b": 0.7,
+        "top_3_shared": 2,
+        "top_3_jaccard": 0.5,
+        "kendall_tau": 0.6667
+      },
+      {
+        "w_a": 0.3,
+        "w_b": 0.85,
+        "top_3_shared": 1,
+        "top_3_jaccard": 0.2,
+        "kendall_tau": -0.25
+      },
+      {
+        "w_a": 0.3,
+        "w_b": 0.95,
+        "top_3_shared": 1,
+        "top_3_jaccard": 0.2,
+        "kendall_tau": -0.5
+      },
+      {
+        "w_a": 0.5,
+        "w_b": 0.7,
+        "top_3_shared": 2,
+        "top_3_jaccard": 0.5,
+        "kendall_tau": 0.6667
+      },
+      {
+        "w_a": 0.5,
+        "w_b": 0.85,
+        "top_3_shared": 1,
+        "top_3_jaccard": 0.2,
+        "kendall_tau": -0.25
+      },
+      {
+        "w_a": 0.5,
+        "w_b": 0.95,
+        "top_3_shared": 1,
+        "top_3_jaccard": 0.2,
+        "kendall_tau": -0.5
+      },
+      {
+        "w_a": 0.7,
+        "w_b": 0.85,
+        "top_3_shared": 2,
+        "top_3_jaccard": 0.5,
+        "kendall_tau": 0.0
+      },
+      {
+        "w_a": 0.7,
+        "w_b": 0.95,
+        "top_3_shared": 2,
+        "top_3_jaccard": 0.5,
+        "kendall_tau": -0.3333
+      },
+      {
+        "w_a": 0.85,
+        "w_b": 0.95,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 0.3333
+      }
+    ],
+    "Can traditional Chinese medicine approaches combined with modern antivirals improve COVID-19 outcomes?": [
+      {
+        "w_a": 0.3,
+        "w_b": 0.5,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.3,
+        "w_b": 0.7,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.3,
+        "w_b": 0.85,
+        "top_3_shared": 2,
+        "top_3_jaccard": 0.5,
+        "kendall_tau": 0.6667
+      },
+      {
+        "w_a": 0.3,
+        "w_b": 0.95,
+        "top_3_shared": 2,
+        "top_3_jaccard": 0.5,
+        "kendall_tau": 0.3333
+      },
+      {
+        "w_a": 0.5,
+        "w_b": 0.7,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 1.0
+      },
+      {
+        "w_a": 0.5,
+        "w_b": 0.85,
+        "top_3_shared": 2,
+        "top_3_jaccard": 0.5,
+        "kendall_tau": 0.6667
+      },
+      {
+        "w_a": 0.5,
+        "w_b": 0.95,
+        "top_3_shared": 2,
+        "top_3_jaccard": 0.5,
+        "kendall_tau": 0.3333
+      },
+      {
+        "w_a": 0.7,
+        "w_b": 0.85,
+        "top_3_shared": 2,
+        "top_3_jaccard": 0.5,
+        "kendall_tau": 0.6667
+      },
+      {
+        "w_a": 0.7,
+        "w_b": 0.95,
+        "top_3_shared": 2,
+        "top_3_jaccard": 0.5,
+        "kendall_tau": 0.3333
+      },
+      {
+        "w_a": 0.85,
+        "w_b": 0.95,
+        "top_3_shared": 3,
+        "top_3_jaccard": 1.0,
+        "kendall_tau": 0.3333
       }
     ]
   }
