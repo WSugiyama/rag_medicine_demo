@@ -86,7 +86,7 @@ def run_benchmark(repeats: int = 5, mode: str = "full"):
                     limit=k,
                     output_fields=["abstract", "title", "lang", "pmid", "doi"]
                 )
-                filtered = filter_results_by_relevance(results[0], query, medical_terms, semantic_weight=0.7, keyword_weight=0.3)
+                filtered = filter_results_by_relevance(results[0], query, medical_terms, semantic_weight=0.3, keyword_weight=0.7)
                 t_ret_end = time.perf_counter()
                 k_ret_durations.append(t_ret_end - t_ret_start)
                 

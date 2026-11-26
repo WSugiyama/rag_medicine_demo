@@ -63,7 +63,7 @@ def evaluate_retrieval(k_values=[3, 5]):
             continue
 
         # Apply hybrid filter
-        filtered = filter_results_by_relevance(search_results[0], q, medical_terms, semantic_weight=0.7, keyword_weight=0.3)
+        filtered = filter_results_by_relevance(search_results[0], q, medical_terms, semantic_weight=0.3, keyword_weight=0.7)
 
         # Calculate Reciprocal Rank (MRR)
         first_hit_rank = None

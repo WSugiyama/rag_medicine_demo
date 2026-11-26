@@ -131,40 +131,39 @@ def extract_medical_terms(query):
     # Combine and de-duplicate (No risky fallback to general non-medical words)
     return list(set(relevant_entities + pattern_terms))
 
-
 def compute_dynamic_weights(query, medical_terms, initial_distances):
     words = query.split()
     word_count = len(words) if words else 1
-    
+
     # 1. Entity Density
     d_ner = len(medical_terms) / word_count
-    
+
     # 2. Semantic Ambiguity via score variance (if results exist)
     if initial_distances:
         import numpy as np
         score_variance = np.var(initial_distances)
     else:
         score_variance = 0.1
-        
-    # Heuristic adjustment rule
+
+    # Heuristic adjustment rule (anchored to empirical 0.30 / 0.70 baseline)
     if d_ner > 0.3:
-        # Specific query -> boost keyword weight
+        # High entity density -> lean even stronger on lexical keyword matching
+        semantic_weight = 0.3
+        keyword_weight = 0.7
+    elif score_variance < 0.01:
+        # Flat vector space -> balanced hybrid rather than 0.85 semantic drift
         semantic_weight = 0.5
         keyword_weight = 0.5
-    elif score_variance < 0.01:
-        # Ambiguous/flat vector space -> lean heavily on dense semantic clustering
-        semantic_weight = 0.85
-        keyword_weight = 0.15
     else:
-        # Default balanced fallback
-        semantic_weight = 0.7
-        keyword_weight = 0.3
-        
+        # Default empirical optimal fallback
+        semantic_weight = 0.3
+        keyword_weight = 0.7
+
     return semantic_weight, keyword_weight
 
 
 # Helper: Filter results using true weighted linear blending (preserves weight sweep)
-def filter_results_by_relevance(results, query, medical_terms, semantic_weight=0.7, keyword_weight=0.3):
+def filter_results_by_relevance(results, query, medical_terms, semantic_weight=0.3, keyword_weight=0.7):
     """Blends semantic and keyword scores proportionally using active weight parameters."""
     if not results:
         return results  
@@ -362,10 +361,6 @@ def generate_answer_with_rag(query, top_k=5, lang_filter=None):
         expr=expr,
         output_fields=["abstract", "title", "lang", "pmid", "doi"]
     )
-
-    if not results or not results[0]:
-        print(f"⚠️ {NO_RESULTS_MESSAGE}")
-        return {"status": "no_results", "answer": NO_RESULTS_MESSAGE, "sources": []}
 
     if not results or not results[0]:
         print(f"⚠️ {NO_RESULTS_MESSAGE}")

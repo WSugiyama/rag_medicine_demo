@@ -69,7 +69,7 @@ def _try_import_rag_helpers():
                     if term in title:
                         keyword_score += 1
                 semantic_score = 1.0 - r.distance
-                hybrid = 0.7 * semantic_score + 0.3 * (keyword_score / max(1, len(medical_terms)))
+                hybrid = 0.3 * semantic_score + 0.7 * (keyword_score / max(1, len(medical_terms)))
                 scored.append((r, hybrid))
             scored.sort(key=lambda x: x[1], reverse=True)
             return [r for r, _ in scored]

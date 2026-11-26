@@ -1,6 +1,5 @@
 import sys
 import os
-import subprocess
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
@@ -15,9 +14,11 @@ from rag_pubmed_assistant import embed_query, extract_medical_terms, filter_resu
 
 # Import centralized queries from test_config to remain DRY
 from tests.test_config import GENERAL_MEDICAL_QUERIES, INDONESIAN_MEDICAL_QUERIES, COMPLEX_QUERIES
+from tests.eval_utils import get_git_commit, get_doc_id, top_k_overlap, kendall_tau_union
 
 connections.connect(alias="default", host="localhost", port="19530")
 collection = Collection(name="PubMed_Integrative_v2")
+collection.load()
 
 def compute_robust_statistics(raw_durations: list[float], token_counts: list[int]) -> dict:
     """Discards the first run as warmup, then computes median and IQR for duration."""
@@ -37,67 +38,8 @@ def compute_robust_statistics(raw_durations: list[float], token_counts: list[int
         "warmup_discarded": True
     }
 
-def get_git_commit() -> str:
-    """Returns the current HEAD commit hash, or 'unknown' if unavailable."""
-    repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-    try:
-        out = subprocess.check_output(
-            ["git", "rev-parse", "HEAD"],
-            cwd=repo_root,
-            stderr=subprocess.DEVNULL,
-            text=True,
-        )
-        return out.strip() or "unknown"
-    except (subprocess.SubprocessError, OSError):
-        return "unknown"
 
 git_commit = get_git_commit()
-
-
-def get_doc_id(hit) -> str:
-    pmid = getattr(hit.entity, "pmid", None)
-    if pmid not in (None, ""):
-        return str(pmid)
-    return str(getattr(hit, "id", ""))
-
-
-def top_k_overlap(ids_a: list[str], ids_b: list[str]) -> dict:
-    set_a, set_b = set(ids_a), set(ids_b)
-    denom = len(set_a | set_b)
-    return {
-        "shared_count": len(set_a & set_b),
-        "jaccard": round(len(set_a & set_b) / denom, 4) if denom else 1.0,
-    }
-
-
-def kendall_tau_union(ranking_a: list[str], ranking_b: list[str]) -> float:
-    """Computes Kendall's tau over the union of two ordered doc ID lists.
-
-    Docs missing from a list are assigned rank len(list) (worst rank in that list).
-    """
-    union_ids = list(dict.fromkeys(ranking_a + ranking_b))
-    n = len(union_ids)
-    if n < 2:
-        return 1.0
-
-    rank_a = {doc_id: idx for idx, doc_id in enumerate(ranking_a)}
-    rank_b = {doc_id: idx for idx, doc_id in enumerate(ranking_b)}
-    default_a, default_b = len(ranking_a), len(ranking_b)
-
-    concordant = 0
-    discordant = 0
-    for i in range(n):
-        for j in range(i + 1, n):
-            da = rank_a.get(union_ids[i], default_a) - rank_a.get(union_ids[j], default_a)
-            db = rank_b.get(union_ids[i], default_b) - rank_b.get(union_ids[j], default_b)
-            prod = da * db
-            if prod > 0:
-                concordant += 1
-            elif prod < 0:
-                discordant += 1
-
-    denom = concordant + discordant
-    return round((concordant - discordant) / denom, 4) if denom else 1.0
 
 
 def run_weight_sweep(repeats: int = 5):

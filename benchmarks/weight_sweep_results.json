@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-11-23T16:13:36.861513+00:00",
+  "timestamp": "2026-11-25T09:27:25.109543+00:00",
   "scoring": "normalized",
-  "git_commit": "658d66b22cf252031a707110e96e551334a10150",
+  "git_commit": "bc7897f0608deeb7fb8595e85feb54efaee66c5a",
   "queries_tested": [
     "What are the benefits of probiotics for digestive health?",
     "How do anti-inflammatory herbs help with arthritis?",
@@ -26,7 +26,7 @@
         ],
         "metrics": {
           "median_latency_seconds": 0.004,
-          "iqr_latency_seconds": 0.001,
+          "iqr_latency_seconds": 0.0,
           "estimated_context_tokens_generated": 1014.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
@@ -42,7 +42,7 @@
           "42865889"
         ],
         "metrics": {
-          "median_latency_seconds": 0.002,
+          "median_latency_seconds": 0.003,
           "iqr_latency_seconds": 0.0,
           "estimated_context_tokens_generated": 1014.0,
           "total_trials_recorded": 4,
@@ -59,7 +59,7 @@
           "42865889"
         ],
         "metrics": {
-          "median_latency_seconds": 0.002,
+          "median_latency_seconds": 0.003,
           "iqr_latency_seconds": 0.001,
           "estimated_context_tokens_generated": 1014.0,
           "total_trials_recorded": 4,
@@ -76,8 +76,8 @@
           "40362500"
         ],
         "metrics": {
-          "median_latency_seconds": 0.001,
-          "iqr_latency_seconds": 0.0,
+          "median_latency_seconds": 0.005,
+          "iqr_latency_seconds": 0.003,
           "estimated_context_tokens_generated": 905.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
@@ -93,8 +93,8 @@
           "42869736"
         ],
         "metrics": {
-          "median_latency_seconds": 0.002,
-          "iqr_latency_seconds": 0.001,
+          "median_latency_seconds": 0.003,
+          "iqr_latency_seconds": 0.0,
           "estimated_context_tokens_generated": 905.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
@@ -112,7 +112,7 @@
           "40154100"
         ],
         "metrics": {
-          "median_latency_seconds": 0.001,
+          "median_latency_seconds": 0.002,
           "iqr_latency_seconds": 0.0,
           "estimated_context_tokens_generated": 1828.0,
           "total_trials_recorded": 4,
@@ -130,7 +130,7 @@
         ],
         "metrics": {
           "median_latency_seconds": 0.002,
-          "iqr_latency_seconds": 0.001,
+          "iqr_latency_seconds": 0.0,
           "estimated_context_tokens_generated": 1811.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
@@ -146,8 +146,8 @@
           "27846826"
         ],
         "metrics": {
-          "median_latency_seconds": 0.001,
-          "iqr_latency_seconds": 0.0,
+          "median_latency_seconds": 0.003,
+          "iqr_latency_seconds": 0.002,
           "estimated_context_tokens_generated": 1854.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
@@ -163,7 +163,7 @@
           "42201139"
         ],
         "metrics": {
-          "median_latency_seconds": 0.002,
+          "median_latency_seconds": 0.001,
           "iqr_latency_seconds": 0.0,
           "estimated_context_tokens_generated": 1578.0,
           "total_trials_recorded": 4,
@@ -200,7 +200,7 @@
         ],
         "metrics": {
           "median_latency_seconds": 0.002,
-          "iqr_latency_seconds": 0.0,
+          "iqr_latency_seconds": 0.001,
           "estimated_context_tokens_generated": 1942.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
@@ -304,7 +304,7 @@
         ],
         "metrics": {
           "median_latency_seconds": 0.002,
-          "iqr_latency_seconds": 0.0,
+          "iqr_latency_seconds": 0.001,
           "estimated_context_tokens_generated": 1260.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
@@ -337,8 +337,8 @@
           "40373021"
         ],
         "metrics": {
-          "median_latency_seconds": 0.003,
-          "iqr_latency_seconds": 0.001,
+          "median_latency_seconds": 0.002,
+          "iqr_latency_seconds": 0.0,
           "estimated_context_tokens_generated": 1260.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
@@ -354,8 +354,8 @@
           "40373021"
         ],
         "metrics": {
-          "median_latency_seconds": 0.003,
-          "iqr_latency_seconds": 0.001,
+          "median_latency_seconds": 0.002,
+          "iqr_latency_seconds": 0.0,
           "estimated_context_tokens_generated": 1661.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
@@ -373,7 +373,7 @@
           "42998216"
         ],
         "metrics": {
-          "median_latency_seconds": 0.003,
+          "median_latency_seconds": 0.002,
           "iqr_latency_seconds": 0.0,
           "estimated_context_tokens_generated": 1538.0,
           "total_trials_recorded": 4,
@@ -408,7 +408,7 @@
         ],
         "metrics": {
           "median_latency_seconds": 0.002,
-          "iqr_latency_seconds": 0.0,
+          "iqr_latency_seconds": 0.001,
           "estimated_context_tokens_generated": 1538.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
@@ -460,8 +460,8 @@
           "42881517"
         ],
         "metrics": {
-          "median_latency_seconds": 0.003,
-          "iqr_latency_seconds": 0.0,
+          "median_latency_seconds": 0.002,
+          "iqr_latency_seconds": 0.001,
           "estimated_context_tokens_generated": 1370.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
@@ -477,7 +477,7 @@
           "42881517"
         ],
         "metrics": {
-          "median_latency_seconds": 0.003,
+          "median_latency_seconds": 0.002,
           "iqr_latency_seconds": 0.0,
           "estimated_context_tokens_generated": 1370.0,
           "total_trials_recorded": 4,
@@ -494,8 +494,8 @@
           "42881517"
         ],
         "metrics": {
-          "median_latency_seconds": 0.003,
-          "iqr_latency_seconds": 0.001,
+          "median_latency_seconds": 0.002,
+          "iqr_latency_seconds": 0.0,
           "estimated_context_tokens_generated": 1370.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
@@ -511,8 +511,8 @@
           "42881517"
         ],
         "metrics": {
-          "median_latency_seconds": 0.004,
-          "iqr_latency_seconds": 0.001,
+          "median_latency_seconds": 0.002,
+          "iqr_latency_seconds": 0.0,
           "estimated_context_tokens_generated": 1370.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
@@ -547,8 +547,8 @@
           "42865889"
         ],
         "metrics": {
-          "median_latency_seconds": 0.002,
-          "iqr_latency_seconds": 0.0,
+          "median_latency_seconds": 0.004,
+          "iqr_latency_seconds": 0.001,
           "estimated_context_tokens_generated": 1170.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
@@ -564,7 +564,7 @@
           "42865889"
         ],
         "metrics": {
-          "median_latency_seconds": 0.001,
+          "median_latency_seconds": 0.002,
           "iqr_latency_seconds": 0.0,
           "estimated_context_tokens_generated": 1170.0,
           "total_trials_recorded": 4,
@@ -616,7 +616,7 @@
         ],
         "metrics": {
           "median_latency_seconds": 0.002,
-          "iqr_latency_seconds": 0.001,
+          "iqr_latency_seconds": 0.0,
           "estimated_context_tokens_generated": 1706.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true
@@ -634,7 +634,7 @@
           "41662713"
         ],
         "metrics": {
-          "median_latency_seconds": 0.003,
+          "median_latency_seconds": 0.002,
           "iqr_latency_seconds": 0.0,
           "estimated_context_tokens_generated": 1090.0,
           "total_trials_recorded": 4,
@@ -651,7 +651,7 @@
           "41662713"
         ],
         "metrics": {
-          "median_latency_seconds": 0.003,
+          "median_latency_seconds": 0.002,
           "iqr_latency_seconds": 0.0,
           "estimated_context_tokens_generated": 1090.0,
           "total_trials_recorded": 4,
@@ -685,8 +685,8 @@
           "42902159"
         ],
         "metrics": {
-          "median_latency_seconds": 0.003,
-          "iqr_latency_seconds": 0.001,
+          "median_latency_seconds": 0.002,
+          "iqr_latency_seconds": 0.0,
           "estimated_context_tokens_generated": 1212.0,
           "total_trials_recorded": 4,
           "warmup_discarded": true

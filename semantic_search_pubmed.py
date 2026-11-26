@@ -87,7 +87,7 @@ def filter_results_by_relevance(results, query, medical_terms):
                 keyword_score += 1
         
         # Hybrid score: combine semantic and keyword relevance
-        hybrid_score = 0.7 * semantic_score + 0.3 * (keyword_score / len(medical_terms))
+        hybrid_score = 0.3 * semantic_score + 0.7 * (keyword_score / len(medical_terms))
         
         scored_results.append((r, hybrid_score))
     
